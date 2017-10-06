@@ -1,4 +1,6 @@
-﻿using CustomerProject.ViewModels;
+﻿using CustomerProject.DAL;
+using CustomerProject.Functions;
+using CustomerProject.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,34 +14,47 @@ namespace CustomerProject
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            Customer c = new Customer("Tom", 2, "Nuernberg", 123456, "M");
- 
+            using (var db = new CustomerViewerEntities())
+            {
+                List<CustomerDetail> customers = db.CustomerDetails.ToList();
 
-            Create_Customer_Row(c);
+                foreach (CustomerDetail customerEntity in customers)
+                {
+                    CustomerModelMapper cmp = new CustomerModelMapper();
+                    Customer c = cmp.convertEntityToCustomer(customerEntity);
+                    Create_Customer_Row(c);
+                }
+            }
         }
 
         public void Create_Customer_Row(Customer customer)
         {
             TableRow row = new TableRow();
 
-            TableCell cellName = new TableCell();
-            TableCell cellAddress = new TableCell();
-            TableCell cellAge = new TableCell();
-            TableCell cellGender = new TableCell();
-            TableCell cellPhoneNumber = new TableCell();
+            TableCell cell1 = new TableCell();
+            TableCell cell2 = new TableCell();
+            TableCell cell3 = new TableCell();
+            TableCell cell4 = new TableCell();
+            TableCell cell5 = new TableCell();
+            TableCell cell6 = new TableCell();
 
-            cellName.Text = customer.Name;
-            cellAddress.Text = customer.Address;
-            cellAge.Text = customer.Age.ToString();
-            cellGender.Text = customer.Gender;
-            cellPhoneNumber.Text = customer.PhoneNumber.ToString();
+            cell1.Text = customer.Name;
+            cell2.Text = customer.Gender;
+            cell3.Text = customer.PhoneNumber.ToString();
+            cell4.Text = customer.Age.ToString();
+            cell5.Text = customer.Address;
+            cell6.Text = "<asp:LinkButton runat = \"server\" CssClass = \"btn btn-primary addbutton\" >< span class=\"glyphicon glyphicon-edit\" aria -hidden=\"true\" ></span>  Edit" +
+                         "</asp:LinkButton>" +
+                         "<asp:LinkButton runat = \"server\" CssClass =\"btn btn-primary addbutton\">" +
+                         "<span class=\"glyphicon glyphicon-minus\" aria-hidden=\"true\"></span>  Delete" +
+                         "</asp:LinkButton>";
 
-            row.Cells.Add(cellName);
-            row.Cells.Add(cellGender);
-            row.Cells.Add(cellPhoneNumber);
-            row.Cells.Add(cellAge);
-            row.Cells.Add(cellAddress);
-
+            row.Cells.Add(cell1);
+            row.Cells.Add(cell2);
+            row.Cells.Add(cell3);
+            row.Cells.Add(cell4);
+            row.Cells.Add(cell5);
+            row.Cells.Add(cell6);
 
             Table1.Rows.Add(row);
         }
