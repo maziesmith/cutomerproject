@@ -2,12 +2,20 @@
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
 
+    <script type="text/javascript">
+
+        function showModal() {
+            $('#AddButtonModal').modal();
+        }
+
+    </script>
+
     <br />
     <br />
 
     <div class="row">
         <div class="col-md-12">
-            <button runat="server" id="addButton" class="btn btn-primary addbutton" onserverclick="OnAddButtonClicked">
+            <button id="addButton" class="btn btn-primary addbutton" onclick="showModal(); return false;">
                 <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>Add
             </button>
         </div>
@@ -20,6 +28,8 @@
                     <asp:TableHeaderCell>Number</asp:TableHeaderCell>
                     <asp:TableHeaderCell>Age</asp:TableHeaderCell>
                     <asp:TableHeaderCell>Address</asp:TableHeaderCell>
+                    <asp:TableHeaderCell>Edit</asp:TableHeaderCell>
+                    <asp:TableHeaderCell>Delete</asp:TableHeaderCell>
                 </asp:TableHeaderRow>
             </asp:Table>
         </div>
