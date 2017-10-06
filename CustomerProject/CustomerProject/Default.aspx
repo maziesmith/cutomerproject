@@ -36,31 +36,31 @@
                             </div>
                             <div class="modal-body">
                                 <form class="form-horizontal" method="post" action="Default.aspx.cs">
-                                    <div class="form-group">
+                                    <div class="form-group row">
                                         <label class="control-label col-md-2" for="name">Name</label>
                                         <div class="col-md-10">
                                             <input class="form-control" name="name" type="text"/>
                                         </div>
                                     </div>
-                                    <div class="form-group">
+                                    <div class="form-group row">
                                         <label class="control-label col-md-2" for="gender">Gender</label>
                                         <div class="col-md-10">
                                             <input class="form-control" name="gender" type="text" maxlength="1"/>
                                         </div>
                                     </div>
-                                    <div class="form-group">
+                                    <div class="form-group row">
                                         <label class="control-label col-md-2" for="number">Phone Number</label>
                                         <div class="col-md-10">
                                             <input class="form-control" name="number" type="number"/>
                                         </div>
                                     </div>
-                                    <div class="form-group">
+                                    <div class="form-group row">
                                         <label class="control-label col-md-2" for="age">Age</label>
                                         <div class="col-md-10">
                                             <input class="form-control" name="age" type="number"/>
                                         </div>
                                     </div>
-                                    <div class="form-group">
+                                    <div class="form-group row">
                                         <label class="control-label col-md-2" for="address">Address</label>
                                         <div class="col-md-10">
                                             <input class="form-control" name="address"/>
