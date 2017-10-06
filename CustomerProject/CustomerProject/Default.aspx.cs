@@ -37,17 +37,20 @@ namespace CustomerProject
             TableCell cell4 = new TableCell();
             TableCell cell5 = new TableCell();
             TableCell cell6 = new TableCell();
+            TableCell cell7 = new TableCell();
 
             cell1.Text = customer.Name;
             cell2.Text = customer.Gender;
             cell3.Text = customer.PhoneNumber.ToString();
             cell4.Text = customer.Age.ToString();
             cell5.Text = customer.Address;
-            cell6.Text = "<asp:LinkButton runat = \"server\" CssClass = \"btn btn-primary addbutton\" >< span class=\"glyphicon glyphicon-edit\" aria -hidden=\"true\" ></span>  Edit" +
-                         "</asp:LinkButton>" +
-                         "<asp:LinkButton runat = \"server\" CssClass =\"btn btn-primary addbutton\">" +
-                         "<span class=\"glyphicon glyphicon-minus\" aria-hidden=\"true\"></span>  Delete" +
-                         "</asp:LinkButton>";
+            cell6.Text = "<button class='btn btn-sm' runat='server' id='editBtn'>" +
+                                "<span class='glyphicon glyphicon-pencil spinning'></span>" +
+                          "</button>";
+            cell7.Text = "<button class='btn btn-sm' runat='server' id='deleteBtn'>" +
+                                "<span class='glyphicon glyphicon-trash spinning'></span>" +
+                          "</button>";
+
 
             row.Cells.Add(cell1);
             row.Cells.Add(cell2);
@@ -55,6 +58,7 @@ namespace CustomerProject
             row.Cells.Add(cell4);
             row.Cells.Add(cell5);
             row.Cells.Add(cell6);
+            row.Cells.Add(cell7);
 
             Table1.Rows.Add(row);
         }

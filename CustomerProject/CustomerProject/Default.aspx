@@ -22,7 +22,8 @@
                     <asp:TableHeaderCell>Number</asp:TableHeaderCell>
                     <asp:TableHeaderCell>Age</asp:TableHeaderCell>
                     <asp:TableHeaderCell>Address</asp:TableHeaderCell>
-                    <asp:TableHeaderCell>Action</asp:TableHeaderCell>
+                    <asp:TableHeaderCell>Edit</asp:TableHeaderCell>
+                    <asp:TableHeaderCell>Delete</asp:TableHeaderCell>
                 </asp:TableHeaderRow>
             </asp:Table>
         </div>
