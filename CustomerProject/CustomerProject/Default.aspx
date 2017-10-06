@@ -18,7 +18,7 @@
                 <asp:Table ID="Table1" CssClass="table table-hover" runat="server">
                     <asp:TableHeaderRow>
                         <asp:TableHeaderCell>Name</asp:TableHeaderCell>
-                        <asp:TableHeaderCell>Gender</asp:TableHeaderCell>
+                        <asp:TableHeaderCell>Gender</asp:TableHeaderCell> 
                         <asp:TableHeaderCell>Number</asp:TableHeaderCell>
                         <asp:TableHeaderCell>Age</asp:TableHeaderCell>
                         <asp:TableHeaderCell>Address</asp:TableHeaderCell>
