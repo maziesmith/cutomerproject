@@ -14,20 +14,47 @@ namespace CustomerProject
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            using (var db = new CustomerViewerEntities())
+            if (IsPostBack)
             {
-                List<CustomerDetail> customers = db.CustomerDetails.ToList();
+                /*Customer c = new Customer(
+                    String.Format("{0}", Request.Form["name"]),
+                    int.Parse(String.Format("{0}", Request.Form["age"])),
+                    String.Format("{0}", Request.Form["address"]),
+                    long.Parse(String.Format("{0}", Request.Form["number"])),
+                    String.Format("{0}", Request.Form["gender"]));*/
+            }
 
-                foreach (CustomerDetail customerEntity in customers)
-                {
-                    CustomerModelMapper cmp = new CustomerModelMapper();
-                    Customer c = cmp.convertEntityToCustomer(customerEntity);
-                    Create_Customer_Row(c);
-                }
+            reloadTable();
+        }
+
+        // public methods
+        public void OnAddButtonClicked(Object sender, EventArgs e)
+        {
+            ScriptManager.RegisterStartupScript(Page, Page.GetType(), "AddButtonModal", "$('#AddButtonModal').modal();", true);
+            upModal.Update();
+
+            //reloadTable();
+        }
+
+        public void AddCustomer(Object sender, EventArgs e)
+        {
+            System.Diagnostics.Debug.WriteLine("Submitted Form");
+        }
+       
+        // private methods
+        private void reloadTable()
+        {
+            CustomerTable.Rows.Clear();
+            List<CustomerDetail> customers = DataLayer.GetCustomers();
+
+            foreach (CustomerDetail customerEntity in customers)
+            {
+                Customer c = CustomerModelMapper.convertEntityToCustomer(customerEntity);
+                createCustomerRow(c);
             }
         }
 
-        public void Create_Customer_Row(Customer customer)
+        private void createCustomerRow(Customer customer)
         {
             TableRow row = new TableRow();
 
@@ -60,13 +87,7 @@ namespace CustomerProject
             row.Cells.Add(cell6);
             row.Cells.Add(cell7);
 
-            Table1.Rows.Add(row);
+            CustomerTable.Rows.Add(row);
         }
-
-        public void On_Add_Button_Clicked(Object sender, EventArgs e)
-        {
-         //open a dialog, add a new customer to the gui and insert it to the db
-        }
-       
     }
 }
