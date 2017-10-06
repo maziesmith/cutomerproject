@@ -1,4 +1,5 @@
-﻿using CustomerProject.ViewModels;
+﻿using CustomerProject.db;
+using CustomerProject.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,10 +13,20 @@ namespace CustomerProject
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            Customer c = new Customer("Tom", 2, "Nuernberg", 123456, "M");
- 
 
-            Create_Customer_Row(c);
+            using (var db = new Custdb())
+            {
+         
+                foreach(CustomerTableModel ctm in db.Customers)
+                {
+                   
+                    Create_Customer_Row(new Customer(ctm));
+                }
+
+               
+
+            }
+   
         }
 
         public void Create_Customer_Row(Customer customer)
@@ -28,12 +39,13 @@ namespace CustomerProject
             TableCell cellGender = new TableCell();
             TableCell cellPhoneNumber = new TableCell();
 
+           
             cellName.Text = customer.Name;
             cellAddress.Text = customer.Address;
             cellAge.Text = customer.Age.ToString();
-            cellGender.Text = customer.Gender;
+            cellGender.Text = customer.CustomerGender.ToString();
             cellPhoneNumber.Text = customer.PhoneNumber.ToString();
-
+            
             row.Cells.Add(cellName);
             row.Cells.Add(cellGender);
             row.Cells.Add(cellPhoneNumber);
@@ -46,8 +58,31 @@ namespace CustomerProject
 
         public void On_Add_Button_Clicked(Object sender, EventArgs e)
         {
-         //open a dialog, add a new customer to the gui and insert it to the db
+            CustomerTableModel ctm = new CustomerTableModel();
+            ctm.Name = TBName.Text;
+            ctm.Age = Convert.ToInt16(TBAge.Text);
+            ctm.Address = TBAddress.Text;
+            ctm.PhoneNumber = TBNumber.Text;
+            int gender = Convert.ToInt32(DDLGender.SelectedValue);
+
+            if (gender == 0)
+                ctm.Gender = true;
+            else
+                ctm.Gender = false;
+
+
+            using (var db = new Custdb())
+            {
+
+                db.Customers.Add(ctm);
+                db.SaveChanges();
+                
+
+
+            }
+
         }
-       
+
+
     }
 }
