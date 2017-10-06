@@ -16,7 +16,7 @@
     <div class="row">
         <div class="col-md-12">
             <button id="addButton" class="btn btn-primary addbutton" onclick="showModal(); return false;">
-                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>Add
+                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>  Add Customer
             </button>
         </div>
 
@@ -76,11 +76,10 @@
                                             <input class="form-control" name="address"/>
                                         </div>
                                     </div>
-                                    <button type="submit" class="btn btn-default">Add</button>
+                                    <div class="modal-footer">
+                                        <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span> Submit Entry</button>
+                                    </div>
                                 </form>
-                            </div>
-                            <div class="modal-footer">
-                                <button class="btn btn-info" data-dismiss="modal" aria-hidden="true">Close</button>
                             </div>
                         </div>
                     </ContentTemplate>
