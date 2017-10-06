@@ -2,12 +2,20 @@
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
 
+    <script type="text/javascript">
+
+        function showModal() {
+            $('#AddButtonModal').modal();
+        }
+
+    </script>
+
     <br />
     <br />
 
     <div class="row">
         <div class="col-md-12">
-            <button runat="server" id="addButton" class="btn btn-primary addbutton" onserverclick="OnAddButtonClicked">
+            <button id="addButton" class="btn btn-primary addbutton" onclick="showModal(); return false;">
                 <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>Add
             </button>
         </div>

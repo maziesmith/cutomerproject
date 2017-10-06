@@ -1,4 +1,4 @@
-﻿// T4 code generation is enabled for model 'C:\Users\kenneth.ellul\source\repos\CustomerViewerR\CustomerProject\CustomerProject\DAL\CustomerViewerModel.edmx'. 
+﻿// T4 code generation is enabled for model 'C:\Users\Alan.Ellul-Pirotta\source\repos\cutomerproject\CustomerProject\CustomerProject\DAL\CustomerViewerModel.edmx'. 
 // To enable legacy code generation, change the value of the 'Code Generation Strategy' designer
 // property to 'Legacy ObjectContext'. This property is available in the Properties Window when the model
 // is open in the designer.
