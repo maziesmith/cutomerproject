@@ -2,7 +2,13 @@
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
 
+    <script type="text/javascript" src="Scripts/Custom/DataTableLoader.js"></script>
     <script type="text/javascript">
+
+        $(document).ready(function () {
+
+            loadDataTable('CustomerTable');
+        })
 
         function showModal() {
             $('#AddButtonModal').modal();
@@ -21,17 +27,7 @@
         </div>
 
         <div class="col-md-12">
-            <asp:Table ID="CustomerTable" CssClass="table table-hover" runat="server">
-                <asp:TableHeaderRow>
-                    <asp:TableHeaderCell>Name</asp:TableHeaderCell>
-                    <asp:TableHeaderCell>Gender</asp:TableHeaderCell>
-                    <asp:TableHeaderCell>Number</asp:TableHeaderCell>
-                    <asp:TableHeaderCell>Age</asp:TableHeaderCell>
-                    <asp:TableHeaderCell>Address</asp:TableHeaderCell>
-                    <asp:TableHeaderCell>Edit</asp:TableHeaderCell>
-                    <asp:TableHeaderCell>Delete</asp:TableHeaderCell>
-                </asp:TableHeaderRow>
-            </asp:Table>
+            <table id="CustomerTable" class="table table-hover" />
         </div>
 
         <!-- Bootstrap Modal Dialog -->
