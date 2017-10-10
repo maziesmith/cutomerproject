@@ -11,7 +11,7 @@
 
     function showDeleteDialog(sender) {
         initFields("Delete User", "Are you sure to delete this user: <b>" + getName(sender) + "</b>", "Cancel");
-        document.getElementById("modal-okbutton").innerHTML = "Remove this guy";
+        document.getElementById("modal-okbutton").innerHTML = "Remove";
         document.getElementById("modal-okbutton").onclick = function () { deleteUser(sender); return false;};
     }
 
@@ -43,8 +43,6 @@
    // function getID(sender) {
    //    return $(sender).parent().siblings(':first').html();
    // }
-
-
 
 </script>
 
