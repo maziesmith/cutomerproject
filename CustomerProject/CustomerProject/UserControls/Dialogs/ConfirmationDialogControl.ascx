@@ -1,4 +1,4 @@
-﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="ConfirmationDialogControl.ascx.cs" Inherits="CustomerProject.UserControls.Dialogs.ConfirmationDialogControl" %>
+﻿<!--<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="ConfirmationDialogControl.ascx.cs" Inherits="CustomerProject.UserControls.Dialogs.ConfirmationDialogControl" %>
 
 <script>
     function disMiss() {
@@ -28,4 +28,4 @@
             </div>
         </div>
     </ContentTemplate>
-</asp:UpdatePanel>
+</asp:UpdatePanel>-->
