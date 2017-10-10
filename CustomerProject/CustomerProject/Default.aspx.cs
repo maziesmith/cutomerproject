@@ -14,11 +14,6 @@ namespace CustomerProject
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (IsPostBack)
-            {
-                //addOrEditCustomer();
-            }
-
             runScript("loadDataTable('CustomerTable');");
         }
 

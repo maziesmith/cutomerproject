@@ -16,11 +16,16 @@ namespace CustomerProject.UserControls.Dialogs
         public String CancelButton { get; set; } = "Cancel";
         public String OkButton { get; set; } = "OK";
 
+       
+
 
 
         protected void Page_Load(object sender, EventArgs e)
         {
 
         }
+
+
+        
     }
 }
