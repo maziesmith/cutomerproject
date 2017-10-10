@@ -1,35 +1,27 @@
 ﻿var OPERATION_GET_CUSTOMERS = "GetCustomers";
 var OPERATION_DELETE_CUSTOMER = "DeleteCustomer";
 
+var baseURL = 'Handlers/CustomerTableHandler.ashx?operation=';
+
 function sendAJAX(operation, successFunction, data) {
 
     $.ajax({
         type: 'POST',
         data: data,
-        url: 'Handlers/CustomerTableHandler.ashx?operation=' + operation,
+        url: baseURL + operation,
         contentType: 'application/json; charset=utf-8',
         dataType: 'json',
         success: successFunction,
         error: function (response) {
-            alert(response);
+            alert('Error: ' + response.statusText);
         }
     });
 }
 
 function loadDataTable(tableID) {
 
-    sendAJAX(
-        OPERATION_GET_CUSTOMERS,
-        function (response) {
-            setUpDataTable(tableID, response);
-        },
-        null);
-}
-
-function setUpDataTable(tableID, dataSource) {
-
     $('#' + tableID).DataTable({
-        data: dataSource,
+        ajax: baseURL + OPERATION_GET_CUSTOMERS,
         columns: [
             { title: 'ID', data: 'ID' },
             { title: 'Name', data: 'Name' },
@@ -50,10 +42,9 @@ function deleteTableRow(sender) {
     sendAJAX(
         OPERATION_DELETE_CUSTOMER,
         function (response) {
-            alert(idToDelete);
-            setUpDataTable(tableID, response);
+            $(sender).parents('table').DataTable().ajax.reload(); 
         },
-        '{ id: "' + idToDelete + '" }');
+        JSON.stringify({ id: idToDelete }));
 }
 
 function editTableRow(sender) {

@@ -520,6 +520,7 @@
       <DependentUpon>ConfirmationDialog.ascx</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\Customer.cs" />
+    <Compile Include="ViewModels\DataTableCustomers.cs" />
     <Compile Include="ViewSwitcher.ascx.cs">
       <DependentUpon>ViewSwitcher.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
