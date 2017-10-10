@@ -28,7 +28,7 @@
                 </div>
                 <br/>
                 <div class="col-md-12">
-                    <table id="CustomerTable" class="table table-hover" />
+                    <table id="CustomerTable" class="table table-condensed table-striped table-hover"  cellspacing="0" width="100%"/>
                 </div>
             </div>
 

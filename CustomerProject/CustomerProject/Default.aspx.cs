@@ -114,6 +114,7 @@ namespace CustomerProject
 
         protected void btnAdd_Click(object sender, EventArgs e)
         {
+            
             FormModals.Title = "Add Customer";
             ScriptManager.RegisterStartupScript(Page, Page.GetType(), "openAddModal", "openAddModal();", true);
         }
