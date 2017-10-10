@@ -8,16 +8,17 @@
         $('#ConfirmationDialog').modal();
     }
 
-    function showModalTwoButtons(title, mssg, okbutton, cancelbutton) {
-        initFields(title, mssg, cancelbutton);
-        document.getElementById("modal-okbutton").innerHTML = okbutton;
+
+    function showDeleteDialog(sender) {
+        initFields("Delete User", "Are you sure to delete this user: <b>" + getName(sender) + "</b>", "Cancel");
+        document.getElementById("modal-okbutton").innerHTML = "Remove this guy";
+        //function of DataTableLoader.js
+        document.getElementById("modal-okbutton").onclick = function () { deleteTableRow(sender); return false};
     }
 
-    function showDeleteModal(mssg) {
-        showModalTwoButtons("Delete Dialog", mssg, "Cancel", "Delete");
-    }
 
-    function showModalDismissButton(title, mssg, cancelbutton) {
+ 
+    function showInfoDialog(title, mssg, cancelbutton) {
         initFields(title, mssg, cancelbutton);
         document.getElementById("modal-okbutton").style = "display:none;";
     }
@@ -27,7 +28,17 @@
         document.getElementById("modal-title").innerHTML = title;
         document.getElementById("modal-message").innerHTML = mssg;
         document.getElementById("modal-cancelbutton").innerHTML = cancelbutton;
+       
     }
+
+    function getName(sender) {
+        return $(sender).parent().siblings(':nth-child(2)').html();
+   
+    }
+
+   // function getID(sender) {
+   //    return $(sender).parent().siblings(':first').html();
+   // }
 
 
 
@@ -54,7 +65,7 @@
 
                             <div class="modal-footer" >
                                 <button type="button" data-dismiss="modal" class="btn btn-danger" id="modal-cancelbutton" ><%= CancelButton%></button>
-                                <button type="submit" class="btn btn-primary" id="modal-okbutton" ><%= OkButton%></button>
+                                <button class="btn btn-primary" onclick="alert('BAM');return false" id="modal-okbutton" ><%= OkButton%></button>
 
                             </div>
                         </form>

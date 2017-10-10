@@ -7,36 +7,36 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace CustomerProject {
+namespace CustomerProject.UserControls.Dialogs {
     
     
-    public partial class _Default {
+    public partial class ConfirmationDialogControl {
         
         /// <summary>
-        /// UpdatePanel control.
+        /// UpdatePanel1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.UpdatePanel UpdatePanel;
+        protected global::System.Web.UI.UpdatePanel UpdatePanel1;
         
         /// <summary>
-        /// addButton control.
+        /// CancelButton control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton addButton;
+        protected global::System.Web.UI.WebControls.Button CancelButton;
         
         /// <summary>
-        /// FormModals control.
+        /// OkButton control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::CustomerProject.User_Controls.FormModals FormModals;
+        protected global::System.Web.UI.WebControls.Button OkButton;
     }
 }
