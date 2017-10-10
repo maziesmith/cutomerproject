@@ -8,12 +8,7 @@
     <script type="text/javascript" src="Scripts/Custom/DataTableLoader.js"></script>
     <script type="text/javascript">
 
-        $(document).ready(function () {
-
-            loadDataTable('CustomerTable');
-        })
-
-        function showModal() {
+        function openAddModal() {
             $('#AddButtonModal').modal();
         }
 
@@ -32,7 +27,7 @@
                         </asp:LinkButton>
                     </div>
                 </div>
-
+                <br/>
                 <div class="col-md-12">
                     <table id="CustomerTable" class="table table-hover" />
                 </div>

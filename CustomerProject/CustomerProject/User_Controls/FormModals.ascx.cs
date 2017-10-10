@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using CustomerProject.ViewModels;
 
 namespace CustomerProject.User_Controls
 {
@@ -24,6 +25,11 @@ namespace CustomerProject.User_Controls
                 if (Title == null || Title == "")
                     modalTitle.Text = "Default Title";
             }
+        }
+
+        public Customer Customer
+        {
+            get; set;
         }
 
         public string Title
