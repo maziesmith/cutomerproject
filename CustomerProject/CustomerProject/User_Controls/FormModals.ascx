@@ -43,7 +43,7 @@
                                 </div>
                             </div>
                             <div class="modal-footer">
-                                <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span>Submit Entry</button>
+                                <button type="submit" class="btn btn-default">Submit Entry</button>
                             </div>
                         </form>
                     </div>

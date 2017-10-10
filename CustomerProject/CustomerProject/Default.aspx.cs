@@ -1,8 +1,10 @@
 ﻿using CustomerProject.DAL;
 using CustomerProject.Functions;
+using CustomerProject.User_Controls;
 using CustomerProject.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.Web.Services;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
@@ -111,6 +113,12 @@ namespace CustomerProject
             {
                 displayAlert("Invalid Customer");
             }
+        }
+
+        protected void btnAdd_Click(object sender, EventArgs e)
+        {
+            FormModals.Title = "Add Customer";
+            ScriptManager.RegisterStartupScript(Page, Page.GetType(), "openAddModal", "openAddModal();", true);
         }
     }
 }
