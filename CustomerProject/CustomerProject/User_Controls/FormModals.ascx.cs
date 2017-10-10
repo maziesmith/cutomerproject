@@ -9,7 +9,7 @@ namespace CustomerProject.User_Controls
 {
     public partial class FormModals : System.Web.UI.UserControl
     {
-        public string Title = null;
+        //public string Title = null;
         public string buttonValue = null;
         public string Name = null;
         public int Age = 0;
@@ -19,12 +19,17 @@ namespace CustomerProject.User_Controls
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Title == null || Title == "")
-                modalTitle.Text = "Add Customer";
-            else
+            if (!IsPostBack)
             {
-                nameInput.Text = "";
+                if (Title == null || Title == "")
+                    modalTitle.Text = "Default Title";
             }
+        }
+
+        public string Title
+        {
+            get { return modalTitle.Text; }
+            set { modalTitle.Text = value; }
         }
     }
 }
