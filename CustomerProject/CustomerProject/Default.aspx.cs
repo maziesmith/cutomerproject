@@ -16,8 +16,10 @@ namespace CustomerProject
         {
             if (IsPostBack)
             {
-                addOrEditCustomer();
+                //addOrEditCustomer();
             }
+
+            runScript("loadDataTable('CustomerTable');");
         }
 
         // private methods

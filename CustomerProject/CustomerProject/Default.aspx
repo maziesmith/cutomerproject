@@ -8,8 +8,7 @@
     <script type="text/javascript">
 
         $(document).ready(function () {
-
-            loadDataTable('CustomerTable');
+           // loadDataTable('CustomerTable');
         })
 
         function showModal() {
