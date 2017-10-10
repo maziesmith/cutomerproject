@@ -14,64 +14,19 @@ namespace CustomerProject
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            reloadTable();
-        }
-
-        // private methods
-        private void reloadTable()
-        {
-            //CustomerTable.Rows.Clear();
-            List<CustomerDetail> customers = DataLayer.GetCustomers();
-
-            foreach (CustomerDetail customerEntity in customers)
+            if (IsPostBack)
             {
-                Customer c = CustomerModelMapper.convertEntityToCustomer(customerEntity);
-                createCustomerRow(c);
+                addOrEditCustomer();
             }
         }
 
-        private void createCustomerRow(Customer customer)
-        {
-            TableRow row = new TableRow();
-
-            TableCell cell1 = new TableCell();
-            TableCell cell2 = new TableCell();
-            TableCell cell3 = new TableCell();
-            TableCell cell4 = new TableCell();
-            TableCell cell5 = new TableCell();
-            TableCell cell6 = new TableCell();
-            TableCell cell7 = new TableCell();
-
-            cell1.Text = customer.Name;
-            cell2.Text = customer.Gender;
-            cell3.Text = customer.PhoneNumber.ToString();
-            cell4.Text = customer.Age.ToString();
-            cell5.Text = customer.Address;
-            cell6.Text = "<button class='btn btn-sm' runat='server' id='editBtn'>" +
-                                "<span class='glyphicon glyphicon-pencil spinning'></span>" +
-                          "</button>";
-            cell7.Text = "<button class='btn btn-sm' runat='server' id='deleteBtn'>" +
-                                "<span class='glyphicon glyphicon-trash spinning'></span>" +
-                          "</button>";
-
-
-            row.Cells.Add(cell1);
-            row.Cells.Add(cell2);
-            row.Cells.Add(cell3);
-            row.Cells.Add(cell4);
-            row.Cells.Add(cell5);
-            row.Cells.Add(cell6);
-            row.Cells.Add(cell7);
-
-            CustomerTable.Rows.Add(row);
-        }
-
+        // private methods
         private Customer getCustomerFromForm()
         {
             try
             {
                 string name = String.Format("{0}", Request.Form["name"]);
-                int age = int.Parse(String.Format("{0}", Request.Form["age"]));
+                short age = short.Parse(String.Format("{0}", Request.Form["age"]));
                 string address = String.Format("{0}", Request.Form["address"]);
                 long phoneNumber = long.Parse(String.Format("{0}", Request.Form["number"]));
                 string gender = String.Format("{0}", Request.Form["gender"]);
@@ -80,7 +35,7 @@ namespace CustomerProject
 
                 if (validateCustomerDetails(name, age, address, phoneNumber, gender, out validationMessage))
                 {
-                    return new Customer(name, age, address, phoneNumber, gender);
+                    return new Customer(Guid.Empty, name, age, address, phoneNumber, gender);
                 }
                 else
                 {
