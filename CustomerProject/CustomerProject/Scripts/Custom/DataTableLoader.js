@@ -50,9 +50,10 @@ function deleteTableRow(sender) {
     sendAJAX(
         OPERATION_DELETE_CUSTOMER,
         function (response) {
+            alert(idToDelete);
             setUpDataTable(tableID, response);
         },
-        { id: idToDelete });
+        '{ id: "' + idToDelete + '" }');
 }
 
 function editTableRow(sender) {
