@@ -10,6 +10,7 @@ namespace CustomerProject.Functions
         {
             Customer c = new Customer
             (
+                entity.id,
                 entity.name,
                 entity.age,
                 entity.address,
@@ -24,9 +25,9 @@ namespace CustomerProject.Functions
         {
             CustomerDetail entity = new CustomerDetail
             {
-                id = Guid.NewGuid(),
+                id = c.ID,
                 address = c.Address,
-                age = (short)c.Age,
+                age = c.Age,
                 gender = c.Gender,
                 name = c.Name,
                 telephone_no = c.PhoneNumber

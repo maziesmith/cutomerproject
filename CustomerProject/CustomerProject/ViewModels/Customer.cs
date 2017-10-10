@@ -7,8 +7,9 @@ namespace CustomerProject.ViewModels
 {
     public class Customer
     {
-        public Customer(String Name, int Age, String Address, long PhoneNumber, String Gender)
+        public Customer(Guid ID, String Name, short Age, String Address, long PhoneNumber, String Gender)
         {
+            this.ID = ID;
             this.Name = Name;
             this.Age = Age;
             this.Address = Address;
@@ -16,11 +17,11 @@ namespace CustomerProject.ViewModels
             this.Gender = Gender;
         }
 
-        public String Name { get; set; }
-        public int Age { get; set; }
-        public String Address { get; set; }
-        public long PhoneNumber { get; set; }
-        public String Gender { get; set; }
-
+        public String Name { get; private set; }
+        public short Age { get; private set; }
+        public String Address { get; private set; }
+        public long PhoneNumber { get; private set; }
+        public String Gender { get; private set; }
+        public Guid ID { get; private set; }
     }
 }

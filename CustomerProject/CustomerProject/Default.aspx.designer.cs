@@ -13,6 +13,24 @@ namespace CustomerProject {
     public partial class _Default {
         
         /// <summary>
+        /// UpdatePanel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel UpdatePanel;
+        
+        /// <summary>
+        /// addButton control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton addButton;
+        
+        /// <summary>
         /// CustomerTable control.
         /// </summary>
         /// <remarks>
@@ -22,12 +40,12 @@ namespace CustomerProject {
         protected global::System.Web.UI.WebControls.Table CustomerTable;
         
         /// <summary>
-        /// upModal control.
+        /// FormModals control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.UpdatePanel upModal;
+        protected global::CustomerProject.User_Controls.FormModals FormModals;
     }
 }
