@@ -31,15 +31,6 @@ namespace CustomerProject {
         protected global::System.Web.UI.WebControls.LinkButton addButton;
         
         /// <summary>
-        /// CustomerTable control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Table CustomerTable;
-        
-        /// <summary>
         /// FormModals control.
         /// </summary>
         /// <remarks>

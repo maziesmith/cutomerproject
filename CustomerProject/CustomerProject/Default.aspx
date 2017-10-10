@@ -7,12 +7,7 @@
     <script type="text/javascript" src="Scripts/Custom/DataTableLoader.js"></script>
     <script type="text/javascript">
 
-        $(document).ready(function () {
-
-            loadDataTable('CustomerTable');
-        })
-
-        function showModal() {
+        function openAddModal() {
             $('#AddButtonModal').modal();
         }
 
@@ -26,16 +21,16 @@
                 <div class="col-md-12">
                     <div class="btn-group">
                         <asp:LinkButton ID="addButton" class="btn btn-primary addbutton" runat="server"
-                            OnClick="btnAdd_Click"  >
+                            OnClick="btnAdd_Click">
                     <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>  Add Customer
                         </asp:LinkButton>
                     </div>
                 </div>
-
-        <div class="col-md-12">
-            <table id="CustomerTable" class="table table-hover" />
-        </div>
-    </div>
+                <br/>
+                <div class="col-md-12">
+                    <table id="CustomerTable" class="table table-hover" />
+                </div>
+            </div>
 
             <uc:FormModals ID="FormModals"
                 runat="server" />
