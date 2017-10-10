@@ -438,6 +438,7 @@
     <Content Include="Scripts\WebForms\WebUIValidation.js" />
     <Content Include="Site.Master" />
     <Content Include="UserControls\Dialogs\ConfirmationDialog.ascx" />
+    <Content Include="UserControls\Dialogs\ConfirmationDialogControl.ascx" />
     <Content Include="User_Controls\FormModals.ascx" />
     <Content Include="ViewSwitcher.ascx" />
     <Content Include="Web.config" />
@@ -518,6 +519,13 @@
     </Compile>
     <Compile Include="Site.Mobile.Master.designer.cs">
       <DependentUpon>Site.Mobile.Master</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Dialogs\ConfirmationDialogControl.ascx.cs">
+      <DependentUpon>ConfirmationDialogControl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\Dialogs\ConfirmationDialogControl.ascx.designer.cs">
+      <DependentUpon>ConfirmationDialogControl.ascx</DependentUpon>
     </Compile>
     <Compile Include="User_Controls\FormModals.ascx.cs">
       <DependentUpon>FormModals.ascx</DependentUpon>
