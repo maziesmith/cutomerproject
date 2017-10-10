@@ -12,10 +12,14 @@
     function showDeleteDialog(sender) {
         initFields("Delete User", "Are you sure to delete this user: <b>" + getName(sender) + "</b>", "Cancel");
         document.getElementById("modal-okbutton").innerHTML = "Remove this guy";
-        //function of DataTableLoader.js
-        document.getElementById("modal-okbutton").onclick = function () { deleteTableRow(sender); return false };
+        document.getElementById("modal-okbutton").onclick = function () { deleteUser(sender); return false;};
     }
 
+    function deleteUser(sender) {
+        $('#ConfirmationDialog').modal('toggle');
+        //function of DataTableLoader.js
+        deleteTableRow(sender);
+    }
 
  
     function showInfoDialog(title, mssg, cancelbutton) {

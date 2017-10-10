@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-
+/*
 namespace CustomerProject.UserControls.Dialogs
 {
     public partial class ConfirmationDialogControl : System.Web.UI.UserControl
@@ -52,7 +52,7 @@ namespace CustomerProject.UserControls.Dialogs
             OkButton.OnClientClick = script;
             OkButton.Text = OkButtonText;
         }
-        /*
+        
         protected void OnOkClicked(object sender, EventArgs e)
         {
 
@@ -61,7 +61,7 @@ namespace CustomerProject.UserControls.Dialogs
                 OnOkAction.OnOkButtonClicked();
             ScriptManager.RegisterStartupScript(Page, Page.GetType(), "myModal", "$('#myModal').modal('toggle');", true);
 
-        }*/
+        }
 
     }
-}
+}*/
