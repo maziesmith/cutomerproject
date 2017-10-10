@@ -3,8 +3,11 @@ using CustomerProject.Functions;
 using CustomerProject.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Text;
 using System.Web;
 using System.Web.Script.Serialization;
 
@@ -79,10 +82,26 @@ namespace CustomerProject.Handlers
 
         private void DeleteCustomer(HttpContext context)
         {
-            string bodyText = new StreamReader(context.Request.InputStream).ReadToEnd();
-            String[] substrings = bodyText.Split('=');
-            Guid id = new Guid(substrings[1]);
-            DataLayer.DeleteCustomer(id);
+            
+
+            string jsonString = String.Empty;
+            HttpContext.Current.Request.InputStream.Position = 0;
+            using (StreamReader inputStream =
+            new StreamReader(HttpContext.Current.Request.InputStream))
+            {
+                jsonString = inputStream.ReadToEnd();
+                JavaScriptSerializer jSerialize =
+                    new JavaScriptSerializer();
+                var IdGet = jSerialize.Deserialize<CustomerDetail>(jsonString);
+
+                if (IdGet != null)
+                {
+                    Guid id = IdGet.id;
+                    DataLayer.DeleteCustomer(id);
+                   
+                }
+            }
+
         }
     }
 }

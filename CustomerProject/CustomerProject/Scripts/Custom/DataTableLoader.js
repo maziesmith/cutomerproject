@@ -35,21 +35,16 @@ function loadDataTable(tableID) {
     });
 }
 
-function setUpDataTable(tableID, dataSource) {
-
-    
-}
-
 function deleteTableRow(sender) {
 
     var idToDelete = $(sender).parent().siblings(':first').html();
 
     sendAJAX(
         OPERATION_DELETE_CUSTOMER,
-        null,
-        { id: idToDelete });
-
-    $(sender).parents('table')[0].ajax.reload();
+        function (response) {
+            $(sender).parents('table').DataTable().ajax.reload(); 
+        },
+        JSON.stringify({ id: idToDelete }));
 }
 
 function editTableRow(sender) {
