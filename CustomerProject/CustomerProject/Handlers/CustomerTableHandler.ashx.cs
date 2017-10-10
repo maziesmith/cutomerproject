@@ -3,6 +3,7 @@ using CustomerProject.Functions;
 using CustomerProject.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Script.Serialization;
@@ -20,17 +21,27 @@ namespace CustomerProject.Handlers
 
         public void ProcessRequest(HttpContext context)
         {
-            switch (context.Request[OPERATION_PARAMETER])
+            try
             {
-                case OPERATION_GET_CUSTOMERS:
-                    SerializeJSON(context, GetCustomers());
-                    break;
-                case OPERATION_DELETE_CUSTOMER:
-                    DeleteCustomer(context);
-                    break;
-                //other methods
-                default:
-                    throw new ArgumentException("unknown operation");
+                switch (context.Request[OPERATION_PARAMETER])
+                {
+                    case OPERATION_GET_CUSTOMERS:
+                        SerializeJSON(context, GetCustomers());
+                        break;
+                    case OPERATION_DELETE_CUSTOMER:
+                        DeleteCustomer(context);
+                        SerializeJSON(context, "");
+                        break;
+                    //other methods
+                    default:
+                        context.Response.StatusCode = 404; // Not Found
+                        context.Response.StatusDescription = "Operation not found.";
+                        break;
+                }
+            }
+            catch
+            {
+                context.Response.StatusCode = 500; // Internal Server Error
             }
         }
 
@@ -49,7 +60,7 @@ namespace CustomerProject.Handlers
             context.Response.Write(serializer.Serialize(serializableObject));
         }
 
-        private List<Customer> GetCustomers()
+        private DataTableCustomers GetCustomers()
         {
             List<CustomerDetail> entities = DataLayer.GetCustomers();
             List<Customer> customers = new List<Customer>();
@@ -60,13 +71,18 @@ namespace CustomerProject.Handlers
                 customers.Add(c);
             }
 
-            return customers;
+            return new DataTableCustomers
+            {
+                data = customers
+            };
         }
 
         private void DeleteCustomer(HttpContext context)
         {
-            /*Guid id = context.Request.Form()
-            DataLayer.DeleteCustomer(id);*/
+            string bodyText = new StreamReader(context.Request.InputStream).ReadToEnd();
+            String[] substrings = bodyText.Split('=');
+            Guid id = new Guid(substrings[1]);
+            DataLayer.DeleteCustomer(id);
         }
     }
 }
