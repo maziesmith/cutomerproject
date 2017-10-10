@@ -22,6 +22,14 @@ function loadDataTable(tableID) {
 
     $('#' + tableID).DataTable({
         ajax: baseURL + OPERATION_GET_CUSTOMERS,
+        "paging": true,
+        "ordering": true,
+        "info": true,
+        "searching": true,
+        "oLanguage": {
+            "sLengthMenu": "Display Records (per page)  _MENU_",
+            "sSearch": "Search "
+        },
         columns: [
             { title: 'ID', data: 'ID' },
             { title: 'Name', data: 'Name' },
