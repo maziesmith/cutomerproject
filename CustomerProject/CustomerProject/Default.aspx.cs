@@ -24,7 +24,7 @@ namespace CustomerProject
             try
             {
                 string name = String.Format("{0}", Request.Form["name"]);
-                int age = int.Parse(String.Format("{0}", Request.Form["age"]));
+                short age = short.Parse(String.Format("{0}", Request.Form["age"]));
                 string address = String.Format("{0}", Request.Form["address"]);
                 long phoneNumber = long.Parse(String.Format("{0}", Request.Form["number"]));
                 string gender = String.Format("{0}", Request.Form["gender"]);
@@ -33,7 +33,7 @@ namespace CustomerProject
 
                 if (validateCustomerDetails(name, age, address, phoneNumber, gender, out validationMessage))
                 {
-                    return new Customer(name, age, address, phoneNumber, gender);
+                    return new Customer(Guid.Empty, name, age, address, phoneNumber, gender);
                 }
                 else
                 {

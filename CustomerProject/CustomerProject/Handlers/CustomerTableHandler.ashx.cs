@@ -16,6 +16,7 @@ namespace CustomerProject.Handlers
     {
         private const string OPERATION_PARAMETER = "operation";
         private const string OPERATION_GET_CUSTOMERS = "GetCustomers";
+        private const string OPERATION_DELETE_CUSTOMER = "DeleteCustomer";
 
         public void ProcessRequest(HttpContext context)
         {
@@ -23,6 +24,9 @@ namespace CustomerProject.Handlers
             {
                 case OPERATION_GET_CUSTOMERS:
                     SerializeJSON(context, GetCustomers());
+                    break;
+                case OPERATION_DELETE_CUSTOMER:
+                    DeleteCustomer(context);
                     break;
                 //other methods
                 default:
@@ -57,6 +61,12 @@ namespace CustomerProject.Handlers
             }
 
             return customers;
+        }
+
+        private void DeleteCustomer(HttpContext context)
+        {
+            /*Guid id = context.Request.Form()
+            DataLayer.DeleteCustomer(id);*/
         }
     }
 }

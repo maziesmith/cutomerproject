@@ -23,5 +23,16 @@ namespace CustomerProject.DAL
                 db.SaveChanges();
             }
         }
+
+        public static void DeleteCustomer(Guid id)
+        {
+            using (var db = new CustomerViewerEntities())
+            {
+                var customerToDelete = new CustomerDetail { id = id };
+                db.CustomerDetails.Attach(customerToDelete);
+                db.CustomerDetails.Remove(customerToDelete);
+                db.SaveChanges();
+            }
+        }
     }
 }
