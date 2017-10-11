@@ -17,6 +17,7 @@ namespace CustomerProject.Handlers
         private const string OPERATION_PARAMETER = "operation";
         private const string OPERATION_GET_CUSTOMERS = "GetCustomers";
         private const string OPERATION_DELETE_CUSTOMER = "DeleteCustomer";
+        private const string OPERATION_EDIT_CUSTOMER = "EditCustomer";
         private const string OPERATION_ADD_CUSTOMER = "AddCustomer";
 
         public void ProcessRequest(HttpContext context)
@@ -34,6 +35,10 @@ namespace CustomerProject.Handlers
                         break;
                     case OPERATION_ADD_CUSTOMER:
                         AddCustomer(context);
+                        SerializeJSON(context, "");
+                        break;
+                    case OPERATION_EDIT_CUSTOMER:
+                        EditCustomer(context);
                         SerializeJSON(context, "");
                         break;
                     //other methods

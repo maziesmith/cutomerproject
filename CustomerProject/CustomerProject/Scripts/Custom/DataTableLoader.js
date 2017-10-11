@@ -2,15 +2,24 @@
 
     $('#' + tableID).DataTable({
         ajax: baseURL + OPERATION_GET_CUSTOMERS,
+        "paging": true,
+        "info": true,
+        "searching": true,
+        "oLanguage": {
+            "sLengthMenu": "Display Records (per page)  _MENU_",
+            "sSearch": "Search "
+        },
         columns: [
-            { title: 'ID', data: 'ID' },
-            { title: 'Name', data: 'Name' },
-            { title: 'Gender', data: 'Gender' },
-            { title: 'Number', data: 'PhoneNumber' },
-            { title: 'Age', data: 'Age' },
-            { title: 'Address', data: 'Address' },
-            { title: 'Edit', data: null, defaultContent: '<button class="btn btn-sm" onclick="editTableRow(this); return false;"><span class="glyphicon glyphicon-pencil spinning"></span></button>' },
-            { title: 'Delete', data: null, defaultContent: '<button class="btn btn-sm" onclick="deleteTableRow(this); return false;"><span class="glyphicon glyphicon-trash spinning"></span></button>' }
+            { title: 'ID', data: 'ID', orderable: true},
+            { title: 'Name', data: 'Name', orderable: true},
+            { title: 'Gender', data: 'Gender', orderable: true},
+            { title: 'Number', data: 'PhoneNumber', orderable: true},
+            { title: 'Age', data: 'Age', orderable: true},
+            { title: 'Address', data: 'Address', orderable: true},
+            { title: 'Edit', data: null, defaultContent: '<button class="btn btn-sm" onclick="editTableRow(this); return false;"><span class="glyphicon glyphicon-pencil spinning"></span></button>', orderable: false},
+            { title: 'Delete', data: null, defaultContent: '<button class="btn btn-sm" onclick="showDeleteDialog(this); return false;"><span class="glyphicon glyphicon-trash spinning"></span></button>', orderable: false}
+            // delete it without confirmation  { title: 'Delete', data: null, defaultContent: '<button class="btn btn-sm" onclick="deleteTableRow(this); return false;"><span class="glyphicon glyphicon-trash spinning"></span></button>' }
+
         ]
     });
 }
@@ -22,12 +31,19 @@ function deleteTableRow(sender) {
     sendAJAX(
         OPERATION_DELETE_CUSTOMER,
         function (response) {
-            $(sender).parents('table').DataTable().ajax.reload(); 
+            $(sender).parents('table').DataTable().ajax.reload();
         },
         JSON.stringify({ ID: idToDelete }));
 }
 
 function editTableRow(sender) {
 
-    var id = $(sender).parent().siblings(':first').html();
+    var idToEdit = $(sender).parent().siblings(':first').html();
+
+    sendAJAX(
+        OPERATION_EDIT_CUSTOMER,
+        function (response) {
+            $(sender).parents('table').DataTable().ajax.reload();
+        },
+        JSON.stringify({ id: idToEdit }));
 }

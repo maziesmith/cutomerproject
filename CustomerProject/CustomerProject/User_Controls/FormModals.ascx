@@ -1,4 +1,39 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="FormModals.ascx.cs" Inherits="CustomerProject.User_Controls.FormModals" %>
+
+<script type="text/javascript">
+
+    function showBlankModal() {
+        $('#ConfirmationDialog').modal();
+    }
+
+
+    function showDeleteDialog(sender) {
+        initFields("Delete User", "Are you sure to delete this user: <b>" + getName(sender) + "</b>", "Cancel");
+        document.getElementById("modal-okbutton").innerHTML = "Remove";
+        document.getElementById("modal-okbutton").onclick = function () { deleteUser(sender); return false;};
+    }
+
+    function deleteUser(sender) {
+        $('#ConfirmationDialog').modal('toggle');
+        //function of DataTableLoader.js
+        editTableRow(sender);
+    }
+
+    function initFields(title, mssg, cancelbutton) {
+        $('#AddButtonModal').modal();
+        document.getElementById("modal-title").innerHTML = title;
+        document.getElementById("modal-message").innerHTML = mssg;
+        document.getElementById("modal-cancelbutton").innerHTML = cancelbutton;
+       
+    }
+
+    function getName(sender) {
+        return $(sender).parent().siblings(':nth-child(2)').html();
+   
+    }
+
+</script>
+
  
 <script type="text/javascript">
     function addCustomer() {
