@@ -36,13 +36,8 @@
     }
 
     function getName(sender) {
-        return $(sender).parent().siblings(':nth-child(2)').html();
-   
+        return $(sender).attr(ATTRIBUTE_CUSTOMER_NAME);
     }
-
-   // function getID(sender) {
-   //    return $(sender).parent().siblings(':first').html();
-   // }
 
 </script>
 

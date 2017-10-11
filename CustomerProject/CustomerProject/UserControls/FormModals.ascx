@@ -5,7 +5,7 @@
         var errorMessage = validateCustomer();
 
         if (errorMessage === undefined) {
-            sendAJAX(
+            sendCustomerTableAJAX(
                 OPERATION_ADD_CUSTOMER,
                 JSON.stringify({
                     Name: $('#inputName').val(),
@@ -17,9 +17,6 @@
                 function (response) {
                     $('#AddButtonModal').modal('hide');
                     $('#CustomerTable').DataTable().ajax.reload();
-                },
-                function (response) {
-                    alert('Error: ' + response.statusText);               
                 }
             );
         }

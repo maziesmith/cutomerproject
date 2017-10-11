@@ -1,7 +1,10 @@
-﻿function loadDataTable(tableID) {
+﻿var ATTRIBUTE_CUSTOMER_ID = 'customerid';
+var ATTRIBUTE_CUSTOMER_NAME = 'customername';
+
+function loadDataTable(tableID) {
 
     $('#' + tableID).DataTable({
-        ajax: baseURL + OPERATION_GET_CUSTOMERS,
+        ajax: getOperationURL(URL_CUSTOMER_TABLE_HANDLER, OPERATION_GET_CUSTOMERS),
         "paging": true,
         "info": true,
         "searching": true,
@@ -10,46 +13,53 @@
             "sSearch": "Search "
         },
         columns: [
-            { title: 'ID', data: 'ID', orderable: true},
-            { title: 'Name', data: 'Name', orderable: true},
-            { title: 'Gender', data: 'Gender', orderable: true},
-            { title: 'Number', data: 'PhoneNumber', orderable: true},
-            { title: 'Age', data: 'Age', orderable: true},
-            { title: 'Address', data: 'Address', orderable: true},
-            { title: 'Edit', data: null, defaultContent: '<button class="btn btn-sm" onclick="editTableRow(this); return false;"><span class="glyphicon glyphicon-pencil spinning"></span></button>', orderable: false},
-            { title: 'Delete', data: null, defaultContent: '<button class="btn btn-sm" onclick="showDeleteDialog(this); return false;"><span class="glyphicon glyphicon-trash spinning"></span></button>', orderable: false}
-            // delete it without confirmation  { title: 'Delete', data: null, defaultContent: '<button class="btn btn-sm" onclick="deleteTableRow(this); return false;"><span class="glyphicon glyphicon-trash spinning"></span></button>' }
-
+            { title: 'Name', data: 'Name', orderable: true },
+            { title: 'Gender', data: 'Gender', orderable: true },
+            { title: 'Number', data: 'PhoneNumber', orderable: true },
+            { title: 'Age', data: 'Age', orderable: true },
+            { title: 'Address', data: 'Address', orderable: true },
+            {
+                title: 'Edit',
+                orderable: false,
+                render: function (data, type, row, meta) {
+                    return '<button class="btn btn-sm" onclick="editTableRow(this); return false;" ' +
+                        ATTRIBUTE_CUSTOMER_ID + '="' + row.ID + '">' +
+                        '<span class="glyphicon glyphicon-pencil spinning"></span></button>';
+                }
+            },
+            {
+                title: 'Delete',
+                orderable: false,
+                render: function (data, type, row, meta) {
+                    return '<button class="btn btn-sm" onclick="showDeleteDialog(this); return false;" ' +
+                        ATTRIBUTE_CUSTOMER_ID + '="' + row.ID + '" ' + ATTRIBUTE_CUSTOMER_NAME + '="' + row.Name + '">' +
+                        '<span class="glyphicon glyphicon-trash spinning"></span></button>';
+                }
+            }
         ]
     });
 }
 
 function deleteTableRow(sender) {
 
-    var idToDelete = $(sender).parent().siblings(':first').html();
+    var id = $(sender).attr(ATTRIBUTE_CUSTOMER_ID);;
 
-    sendAJAX(
+    sendCustomerTableAJAX(
         OPERATION_DELETE_CUSTOMER,
-        JSON.stringify({ ID: idToDelete }),
+        JSON.stringify({ ID: id }),
         function (response) {
             $(sender).parents('table').DataTable().ajax.reload();
-        },
-        function (response) {
-            alert('Error: ' + response.statusText);
         });
 }
 
 function editTableRow(sender) {
 
-    var idToEdit = $(sender).parent().siblings(':first').html();
-
-    sendAJAX(
+    var idToEdit = $(sender).attr(ATTRIBUTE_CUSTOMER_ID);
+    alert(idToEdit);
+    /*sendCustomerTableAJAX(
         OPERATION_EDIT_CUSTOMER,
         JSON.stringify({ id: idToEdit }),
         function (response) {
             $(sender).parents('table').DataTable().ajax.reload();
-        },
-        function (response) {
-            alert('Error: ' + response.statusText);
-        });
+        });*/
 }

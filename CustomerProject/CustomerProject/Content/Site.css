@@ -8,10 +8,6 @@ body {
     margin-bottom: 10px;
 }
 
-#CustomerTable th:nth-child(1), td:nth-child(1) {
-    display: none;
-}
-
 .navbar-inverse {
     background-color: #9ea2b7 !important;
 }
