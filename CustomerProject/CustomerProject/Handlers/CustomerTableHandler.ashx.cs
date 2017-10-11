@@ -3,11 +3,7 @@ using CustomerProject.Functions;
 using CustomerProject.ViewModels;
 using System;
 using System.Collections.Generic;
-using System.Collections.Specialized;
-using System.Diagnostics;
 using System.IO;
-using System.Linq;
-using System.Text;
 using System.Web;
 using System.Web.Script.Serialization;
 
@@ -21,6 +17,7 @@ namespace CustomerProject.Handlers
         private const string OPERATION_PARAMETER = "operation";
         private const string OPERATION_GET_CUSTOMERS = "GetCustomers";
         private const string OPERATION_DELETE_CUSTOMER = "DeleteCustomer";
+        private const string OPERATION_ADD_CUSTOMER = "AddCustomer";
 
         public void ProcessRequest(HttpContext context)
         {
@@ -33,6 +30,10 @@ namespace CustomerProject.Handlers
                         break;
                     case OPERATION_DELETE_CUSTOMER:
                         DeleteCustomer(context);
+                        SerializeJSON(context, "");
+                        break;
+                    case OPERATION_ADD_CUSTOMER:
+                        AddCustomer(context);
                         SerializeJSON(context, "");
                         break;
                     //other methods
@@ -65,43 +66,38 @@ namespace CustomerProject.Handlers
 
         private DataTableCustomers GetCustomers()
         {
-            List<CustomerDetail> entities = DataLayer.GetCustomers();
-            List<Customer> customers = new List<Customer>();
-
-            foreach (CustomerDetail customerEntity in entities)
-            {
-                Customer c = CustomerModelMapper.convertEntityToCustomer(customerEntity);
-                customers.Add(c);
-            }
-
             return new DataTableCustomers
             {
-                data = customers
+                data = DataLayer.GetCustomers()
             };
         }
 
         private void DeleteCustomer(HttpContext context)
         {
-            
+            Customer c = getCustomerFromJSON(context);
+            if (c != null)
+            {
+                Guid id = c.ID;
+                DataLayer.DeleteCustomer(id);
+            }
+        }
 
+        private void AddCustomer(HttpContext context)
+        {
+            Customer c = getCustomerFromJSON(context);
+            DataLayer.AddCustomer(c);
+        }
+
+        private Customer getCustomerFromJSON(HttpContext context)
+        {
             string jsonString = String.Empty;
-            HttpContext.Current.Request.InputStream.Position = 0;
-            using (StreamReader inputStream =
-            new StreamReader(HttpContext.Current.Request.InputStream))
+            context.Request.InputStream.Position = 0;
+            using (StreamReader inputStream = new StreamReader(context.Request.InputStream))
             {
                 jsonString = inputStream.ReadToEnd();
-                JavaScriptSerializer jSerialize =
-                    new JavaScriptSerializer();
-                var IdGet = jSerialize.Deserialize<CustomerDetail>(jsonString);
-
-                if (IdGet != null)
-                {
-                    Guid id = IdGet.id;
-                    DataLayer.DeleteCustomer(id);
-                   
-                }
+                JavaScriptSerializer jSerialize = new JavaScriptSerializer();
+                return jSerialize.Deserialize<Customer>(jsonString);
             }
-
         }
     }
 }

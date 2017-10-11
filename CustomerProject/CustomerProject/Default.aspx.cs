@@ -17,36 +17,7 @@ namespace CustomerProject
             runScript("loadDataTable('CustomerTable');");
         }
 
-        // private methods
-        private Customer getCustomerFromForm()
-        {
-            try
-            {
-                string name = String.Format("{0}", Request.Form["name"]);
-                short age = short.Parse(String.Format("{0}", Request.Form["age"]));
-                string address = String.Format("{0}", Request.Form["address"]);
-                long phoneNumber = long.Parse(String.Format("{0}", Request.Form["number"]));
-                string gender = String.Format("{0}", Request.Form["gender"]);
-
-                string validationMessage;
-
-                if (validateCustomerDetails(name, age, address, phoneNumber, gender, out validationMessage))
-                {
-                    return new Customer(Guid.Empty, name, age, address, phoneNumber, gender);
-                }
-                else
-                {
-                    displayAlert(validationMessage);
-                    return null;
-                }
-            }
-            catch
-            {
-                return null;
-            }
-        }
-
-        private bool validateCustomerDetails(
+        /*private bool validateCustomerDetails(
             string name,
             int age,
             string address,
@@ -74,7 +45,7 @@ namespace CustomerProject
             }
 
             return String.IsNullOrEmpty(validationMessage);
-        }
+        }*/
 
         private void displayAlert(string message)
         {
@@ -89,27 +60,6 @@ namespace CustomerProject
                 Guid.NewGuid().ToString(),
                 String.Format(script),
                 true);
-        }
-
-        private void addOrEditCustomer()
-        {
-            Customer c = getCustomerFromForm();
-
-            if (c != null)
-            {
-                try
-                {
-                    DataLayer.AddCustomer(CustomerModelMapper.convertCustomerToEntity(c));
-                }
-                catch (Exception ex)
-                {
-                    displayAlert(ex.Message);
-                }
-            }
-            else
-            {
-                displayAlert("Invalid Customer");
-            }
         }
 
         protected void btnAdd_Click(object sender, EventArgs e)

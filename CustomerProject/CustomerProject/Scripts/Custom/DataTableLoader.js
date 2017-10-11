@@ -1,24 +1,4 @@
-﻿var OPERATION_GET_CUSTOMERS = "GetCustomers";
-var OPERATION_DELETE_CUSTOMER = "DeleteCustomer";
-
-var baseURL = 'Handlers/CustomerTableHandler.ashx?operation=';
-
-function sendAJAX(operation, successFunction, data) {
-
-    $.ajax({
-        type: 'POST',
-        data: data,
-        url: baseURL + operation,
-        contentType: 'application/json; charset=utf-8',
-        dataType: 'json',
-        success: successFunction,
-        error: function (response) {
-            alert('Error: ' + response.statusText);
-        }
-    });
-}
-
-function loadDataTable(tableID) {
+﻿function loadDataTable(tableID) {
 
     $('#' + tableID).DataTable({
         ajax: baseURL + OPERATION_GET_CUSTOMERS,
@@ -44,7 +24,7 @@ function deleteTableRow(sender) {
         function (response) {
             $(sender).parents('table').DataTable().ajax.reload(); 
         },
-        JSON.stringify({ id: idToDelete }));
+        JSON.stringify({ ID: idToDelete }));
 }
 
 function editTableRow(sender) {

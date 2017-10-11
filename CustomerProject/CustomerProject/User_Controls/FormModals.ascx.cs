@@ -12,18 +12,24 @@ namespace CustomerProject.User_Controls
     {
         //public string Title = null;
         public string buttonValue = null;
-        public string Name = null;
+         /* public string Name
+        {
+            get { return nameInput.Text; }
+            private set { nameInput.Text = value; }
+        }
         public int Age = 0;
         public string Address = null;
         public int PhoneNumber = 0;
         public string Gender = null;
-
+        */
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
-                if (Title == null || Title == "")
+                if (String.IsNullOrEmpty(Title))
+                {
                     modalTitle.Text = "Default Title";
+                }
             }
         }
 
