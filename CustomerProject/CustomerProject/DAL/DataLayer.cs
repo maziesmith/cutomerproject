@@ -2,24 +2,36 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using CustomerProject.ViewModels;
+using CustomerProject.Functions;
 
 namespace CustomerProject.DAL
 {
     public class DataLayer
     {
-        public static List<CustomerDetail> GetCustomers()
+        public static List<Customer> GetCustomers()
         {
+            List<Customer> customers = new List<Customer>();
+
             using (var db = new CustomerViewerEntities())
             {
-                return db.CustomerDetails.ToList();
+                List<CustomerDetail> dbCustomers = db.CustomerDetails.ToList();
+
+                foreach(CustomerDetail entity in dbCustomers)
+                {
+                    customers.Add(CustomerModelMapper.convertEntityToCustomer(entity));
+                }
             }
+
+            return customers;
         }
 
-        public static void AddCustomer(CustomerDetail entity)
+        public static void AddCustomer(Customer customer)
         {
             using (var db = new CustomerViewerEntities())
             {
-                db.CustomerDetails.Add(entity);
+                customer.ID = Guid.NewGuid();
+                db.CustomerDetails.Add(CustomerModelMapper.convertCustomerToEntity(customer));
                 db.SaveChanges();
             }
         }
