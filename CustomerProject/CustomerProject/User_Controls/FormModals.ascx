@@ -12,14 +12,14 @@
                     Age: $('#inputAge').val(),
                     Address: $('#inputAddress').val(),
                     PhoneNumber: $('#inputNumber').val(),
-                    Gender: $('#inputGender').val()
+                    Gender: $('input[name=inputGender]:checked').val()
                 }),
                 function (response) {
                     $('#AddButtonModal').modal('hide');
                     $('#CustomerTable').DataTable().ajax.reload();
                 },
                 function (response) {
-                    alert('Error: ' + response.statusText);               
+                    alert('Error: ' + response.statusText);
                 }
             );
         }
@@ -33,7 +33,7 @@
 
         if ($('#inputName').val() === '') {
             errorMessage = 'Error: Name is empty';
-        } else if ($('#inputGender').val() === '') {
+        } else if ($('input[name=inputGender]:checked').val() === '') {
             errorMessage = 'Error: Gender is empty';
         } else if ($('#inputNumber').val() === '') {
             errorMessage = 'Error: Number is empty';
@@ -41,7 +41,7 @@
             errorMessage = 'Error: Age is empty';
         } else if ($('#inputAddress').val() === '') {
             errorMessage = 'Error: Address is empty';
-        } 
+        }
         return errorMessage;
     }
 </script>
@@ -67,9 +67,14 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label class="control-label col-md-2" for="gender">Gender</label>
+                                <label class="control-label col-md-2" for="inputGender">Gender</label>
                                 <div class="col-md-10">
-                                    <input class="form-control" id="inputGender" type="text" maxlength="1" />
+                                    <label class="radio-inline">
+                                        <input type="radio" name="inputGender" value="M">Male
+                                    </label>
+                                    <label class="radio-inline">
+                                        <input type="radio" name="inputGender" value="F">Female
+                                    </label>
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -81,7 +86,7 @@
                             <div class="form-group row">
                                 <label class="control-label col-md-2" for="age">Age</label>
                                 <div class="col-md-10">
-                                    <input class="form-control" id="inputAge" type="number" min="0" />
+                                    <input class="form-control" id="inputAge" type="number" min="0" max="120"/>
                                 </div>
                             </div>
                             <div class="form-group row">
