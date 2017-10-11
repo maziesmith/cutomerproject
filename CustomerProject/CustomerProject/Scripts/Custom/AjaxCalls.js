@@ -35,3 +35,24 @@ function sendCustomerTableAJAX (operation, data, successFunction) {
             alert('Error: ' + response.statusText);
         });
 }
+
+function ajaxAddCustomer(customer, successFunction) {
+
+    sendCustomerTableAJAX(
+        OPERATION_ADD_CUSTOMER,
+        JSON.stringify(customer),
+        successFunction
+    );
+}
+
+function ajaxDeleteCustomer(id, successFunction) {
+
+    sendCustomerTableAJAX(
+        OPERATION_DELETE_CUSTOMER,
+        JSON.stringify({ ID: id }),
+        successFunction);
+}
+
+function ajaxEditCustomer(customer, successFunction) {
+
+}

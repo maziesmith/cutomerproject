@@ -8,20 +8,16 @@
         $('#ConfirmationDialog').modal();
     }
 
-
-    function showDeleteDialog(sender) {
-        initFields("Delete User", "Are you sure to delete this user: <b>" + getName(sender) + "</b>", "Cancel");
+    function showDeleteDialog(name, okFunction) {
+        initFields("Delete User", "Are you sure to delete this user: <b>" + name + "</b>", "Cancel");
         document.getElementById("modal-okbutton").innerHTML = "Remove";
-        document.getElementById("modal-okbutton").onclick = function () { deleteUser(sender); return false;};
+        document.getElementById("modal-okbutton").onclick = function () { hideConfirmationDialog(); okFunction(); return false; };
     }
 
-    function deleteUser(sender) {
+    function hideConfirmationDialog() {
         $('#ConfirmationDialog').modal('toggle');
-        //function of DataTableLoader.js
-        deleteTableRow(sender);
     }
 
- 
     function showInfoDialog(title, mssg, cancelbutton) {
         initFields(title, mssg, cancelbutton);
         document.getElementById("modal-okbutton").style = "display:none;";
@@ -32,11 +28,6 @@
         document.getElementById("modal-title").innerHTML = title;
         document.getElementById("modal-message").innerHTML = mssg;
         document.getElementById("modal-cancelbutton").innerHTML = cancelbutton;
-       
-    }
-
-    function getName(sender) {
-        return $(sender).attr(ATTRIBUTE_CUSTOMER_NAME);
     }
 
 </script>

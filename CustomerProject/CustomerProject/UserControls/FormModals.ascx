@@ -5,20 +5,20 @@
         var errorMessage = validateCustomer();
 
         if (errorMessage === undefined) {
-            sendCustomerTableAJAX(
-                OPERATION_ADD_CUSTOMER,
-                JSON.stringify({
-                    Name: $('#inputName').val(),
-                    Age: $('#inputAge').val(),
-                    Address: $('#inputAddress').val(),
-                    PhoneNumber: $('#inputNumber').val(),
-                    Gender: $('input[name=inputGender]:checked').val()
-                }),
+
+            var newCustomer = {
+                Name: $('#inputName').val(),
+                Age: $('#inputAge').val(),
+                Address: $('#inputAddress').val(),
+                PhoneNumber: $('#inputNumber').val(),
+                Gender: $('input[name=inputGender]:checked').val()
+            }
+
+            ajaxAddCustomer(newCustomer,
                 function (response) {
                     $('#AddButtonModal').modal('hide');
                     $('#CustomerTable').DataTable().ajax.reload();
-                }
-            );
+                });
         }
         else {
             alert(errorMessage);
@@ -83,7 +83,7 @@
                             <div class="form-group row">
                                 <label class="control-label col-md-2" for="age">Age</label>
                                 <div class="col-md-10">
-                                    <input class="form-control" id="inputAge" type="number" min="0" max="120"/>
+                                    <input class="form-control" id="inputAge" type="number" min="0" max="120" />
                                 </div>
                             </div>
                             <div class="form-group row">

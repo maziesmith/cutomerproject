@@ -1,14 +1,15 @@
-﻿var ATTRIBUTE_CUSTOMER_ID = 'customerid';
-var ATTRIBUTE_CUSTOMER_NAME = 'customername';
+﻿var dataTableID;
 
 function loadDataTable(tableID) {
 
-    $('#' + tableID).DataTable({
+    dataTableID = '#' + tableID;
+
+    $(dataTableID).DataTable({
         ajax: getOperationURL(URL_CUSTOMER_TABLE_HANDLER, OPERATION_GET_CUSTOMERS),
-        "paging": true,
-        "info": true,
-        "searching": true,
-        "oLanguage": {
+        paging: true,
+        info: true,
+        searching: true,
+        oLanguage: {
             "sLengthMenu": "Display Records (per page)  _MENU_",
             "sSearch": "Search "
         },
@@ -22,8 +23,7 @@ function loadDataTable(tableID) {
                 title: 'Edit',
                 orderable: false,
                 render: function (data, type, row, meta) {
-                    return '<button class="btn btn-sm" onclick="editTableRow(this); return false;" ' +
-                        ATTRIBUTE_CUSTOMER_ID + '="' + row.ID + '">' +
+                    return '<button class="btn btn-sm" onclick="return false;">' +
                         '<span class="glyphicon glyphicon-pencil spinning"></span></button>';
                 }
             },
@@ -31,35 +31,11 @@ function loadDataTable(tableID) {
                 title: 'Delete',
                 orderable: false,
                 render: function (data, type, row, meta) {
-                    return '<button class="btn btn-sm" onclick="showDeleteDialog(this); return false;" ' +
-                        ATTRIBUTE_CUSTOMER_ID + '="' + row.ID + '" ' + ATTRIBUTE_CUSTOMER_NAME + '="' + row.Name + '">' +
+                    return '<button class="btn btn-sm" onclick="showDeleteDialog(\'' + row.Name + '\', ' +
+                        'function(){ ajaxDeleteCustomer(\''+ row.ID +'\', function(){ $(\'#' + meta.settings.sTableId + '\').DataTable().ajax.reload(); }); }); return false;">' +
                         '<span class="glyphicon glyphicon-trash spinning"></span></button>';
                 }
             }
         ]
     });
-}
-
-function deleteTableRow(sender) {
-
-    var id = $(sender).attr(ATTRIBUTE_CUSTOMER_ID);;
-
-    sendCustomerTableAJAX(
-        OPERATION_DELETE_CUSTOMER,
-        JSON.stringify({ ID: id }),
-        function (response) {
-            $(sender).parents('table').DataTable().ajax.reload();
-        });
-}
-
-function editTableRow(sender) {
-
-    var idToEdit = $(sender).attr(ATTRIBUTE_CUSTOMER_ID);
-    alert(idToEdit);
-    /*sendCustomerTableAJAX(
-        OPERATION_EDIT_CUSTOMER,
-        JSON.stringify({ id: idToEdit }),
-        function (response) {
-            $(sender).parents('table').DataTable().ajax.reload();
-        });*/
 }
