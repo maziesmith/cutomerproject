@@ -523,7 +523,6 @@
     </Compile>
     <Compile Include="UserControls\Dialogs\ConfirmationDialogControl.ascx.cs">
       <DependentUpon>ConfirmationDialogControl.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="UserControls\Dialogs\ConfirmationDialogControl.ascx.designer.cs">
       <DependentUpon>ConfirmationDialogControl.ascx</DependentUpon>

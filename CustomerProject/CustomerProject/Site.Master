@@ -55,12 +55,13 @@
         <div class="container body-content">
             <asp:ContentPlaceHolder ID="MainContent" runat="server">
             </asp:ContentPlaceHolder>
-           <hr />
-           <footer>
-                <p>&copy; <%: DateTime.Now.Year %> - Customer Viewer</p>
-            </footer>
+           
         </div>
 
     </form>
+    <hr />
+           <footer class="row">
+                <p>&copy; <%: DateTime.Now.Year %> - Customer Viewer</p>
+            </footer>
 </body>
 </html>

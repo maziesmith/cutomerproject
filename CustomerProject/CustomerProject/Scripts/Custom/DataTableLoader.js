@@ -30,10 +30,13 @@ function deleteTableRow(sender) {
 
     sendAJAX(
         OPERATION_DELETE_CUSTOMER,
+        JSON.stringify({ ID: idToDelete }),
         function (response) {
             $(sender).parents('table').DataTable().ajax.reload();
         },
-        JSON.stringify({ ID: idToDelete }));
+        function (response) {
+            alert('Error: ' + response.statusText);
+        });
 }
 
 function editTableRow(sender) {
@@ -42,8 +45,11 @@ function editTableRow(sender) {
 
     sendAJAX(
         OPERATION_EDIT_CUSTOMER,
+        JSON.stringify({ id: idToEdit }),
         function (response) {
             $(sender).parents('table').DataTable().ajax.reload();
         },
-        JSON.stringify({ id: idToEdit }));
+        function (response) {
+            alert('Error: ' + response.statusText);
+        });
 }

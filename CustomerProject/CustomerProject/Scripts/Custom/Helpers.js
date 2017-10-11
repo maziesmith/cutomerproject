@@ -4,7 +4,11 @@ var OPERATION_ADD_CUSTOMER = "AddCustomer";
 
 var baseURL = 'Handlers/CustomerTableHandler.ashx?operation=';
 
-function sendAJAX(operation, successFunction, data) {
+function sendAJAX(
+    operation,
+    data,
+    successFunction,
+    errorFunction) {
 
     $.ajax({
         type: 'POST',
@@ -13,8 +17,6 @@ function sendAJAX(operation, successFunction, data) {
         contentType: 'application/json; charset=utf-8',
         dataType: 'json',
         success: successFunction,
-        error: function (response) {
-            alert('Error: ' + response.statusText);
-        }
+        error: errorFunction
     });
 }

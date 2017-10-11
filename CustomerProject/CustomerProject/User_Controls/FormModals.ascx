@@ -1,57 +1,48 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="FormModals.ascx.cs" Inherits="CustomerProject.User_Controls.FormModals" %>
 
 <script type="text/javascript">
-
-    function showBlankModal() {
-        $('#ConfirmationDialog').modal();
-    }
-
-
-    function showDeleteDialog(sender) {
-        initFields("Delete User", "Are you sure to delete this user: <b>" + getName(sender) + "</b>", "Cancel");
-        document.getElementById("modal-okbutton").innerHTML = "Remove";
-        document.getElementById("modal-okbutton").onclick = function () { deleteUser(sender); return false;};
-    }
-
-    function deleteUser(sender) {
-        $('#ConfirmationDialog').modal('toggle');
-        //function of DataTableLoader.js
-        editTableRow(sender);
-    }
-
-    function initFields(title, mssg, cancelbutton) {
-        $('#AddButtonModal').modal();
-        document.getElementById("modal-title").innerHTML = title;
-        document.getElementById("modal-message").innerHTML = mssg;
-        document.getElementById("modal-cancelbutton").innerHTML = cancelbutton;
-       
-    }
-
-    function getName(sender) {
-        return $(sender).parent().siblings(':nth-child(2)').html();
-   
-    }
-
-</script>
-
- 
-<script type="text/javascript">
     function addCustomer() {
-        sendAJAX(
-            OPERATION_ADD_CUSTOMER,
-            function (response) {
-                debugger;
-                $('#AddButtonModal').modal('toggle');
-                $('#CustomerTable').DataTable().ajax.reload();
-            },
-            JSON.stringify({
-                Name: $('#inputName').val(),
-                Age: $('#inputAge').val(),
-                Address: $('#inputAddress').val(),
-                PhoneNumber: $('#inputNumber').val(),
-                Gender: $('#inputGender').val()
-            })
-        );
+        var errorMessage = validateCustomer();
+
+        if (errorMessage === undefined) {
+            sendAJAX(
+                OPERATION_ADD_CUSTOMER,
+                JSON.stringify({
+                    Name: $('#inputName').val(),
+                    Age: $('#inputAge').val(),
+                    Address: $('#inputAddress').val(),
+                    PhoneNumber: $('#inputNumber').val(),
+                    Gender: $('#inputGender').val()
+                }),
+                function (response) {
+                    $('#AddButtonModal').modal('hide');
+                    $('#CustomerTable').DataTable().ajax.reload();
+                },
+                function (response) {
+                    alert('Error: ' + response.statusText);               
+                }
+            );
+        }
+        else {
+            alert(errorMessage);
+        }
+    }
+
+    function validateCustomer() {
+        var errorMessage;
+
+        if ($('#inputName').val() === '') {
+            errorMessage = 'Error: Name is empty';
+        } else if ($('#inputGender').val() === '') {
+            errorMessage = 'Error: Gender is empty';
+        } else if ($('#inputNumber').val() === '') {
+            errorMessage = 'Error: Number is empty';
+        } else if ($('#inputAge').val() === '') {
+            errorMessage = 'Error: Age is empty';
+        } else if ($('#inputAddress').val() === '') {
+            errorMessage = 'Error: Address is empty';
+        } 
+        return errorMessage;
     }
 </script>
 
@@ -64,7 +55,8 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                        <h4 class="modal-title"><asp:Literal id="modalTitle" runat=server /></h4>
+                        <h4 class="modal-title">
+                            <asp:Literal ID="modalTitle" runat="server" /></h4>
                     </div>
                     <div class="modal-body">
                         <form id="addCustomerForm" class="form-horizontal" method="post" action="Default.aspx.cs">
@@ -99,7 +91,7 @@
                                 </div>
                             </div>
                             <div class="modal-footer">
-                                <button type="submit" class="btn btn-default" onclick="addCustomer()">Submit Entry</button>
+                                <button class="btn btn-default" onclick="addCustomer(); return false;">Submit Entry</button>
                             </div>
                         </form>
                     </div>
