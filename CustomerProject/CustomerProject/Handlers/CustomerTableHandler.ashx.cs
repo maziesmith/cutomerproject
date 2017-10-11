@@ -93,11 +93,6 @@ namespace CustomerProject.Handlers
             DataLayer.AddCustomer(c);
         }
 
-        private void EditCustomer(HttpContext context)
-        {
-            Customer c = getCustomerFromJSON(context);
-        }
-
         private Customer getCustomerFromJSON(HttpContext context)
         {
             string jsonString = String.Empty;
