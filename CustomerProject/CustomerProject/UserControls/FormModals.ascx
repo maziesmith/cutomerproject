@@ -86,7 +86,7 @@
                             <div class="form-group row">
                                 <label class="control-label col-md-2" for="age">Age</label>
                                 <div class="col-md-10">
-                                    <input class="form-control" id="inputAge" type="number" min="0" max="120"/>
+                                    <input class="form-control" id="inputAge" type="number" min="0" max="120" />
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -96,7 +96,7 @@
                                 </div>
                             </div>
                             <div class="modal-footer">
-                                <button class="btn btn-default" onclick="addCustomer(); return false;">Submit Entry</button>
+                                <button class="btn btn-primary btnResize" onclick="addCustomer(); return false;">OK</button>
                             </div>
                         </form>
                     </div>

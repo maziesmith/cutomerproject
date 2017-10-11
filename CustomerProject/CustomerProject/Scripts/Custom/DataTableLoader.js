@@ -4,7 +4,7 @@
         ajax: baseURL + OPERATION_GET_CUSTOMERS,
         "paging": true,
         "info": true,
-        "searching": true,
+        "searching": false,
         "oLanguage": {
             "sLengthMenu": "Display Records (per page)  _MENU_",
             "sSearch": "Search "
@@ -16,8 +16,8 @@
             { title: 'Number', data: 'PhoneNumber', orderable: true},
             { title: 'Age', data: 'Age', orderable: true},
             { title: 'Address', data: 'Address', orderable: true},
-            { title: 'Edit', data: null, defaultContent: '<button class="btn btn-sm" onclick="editTableRow(this); return false;"><span class="glyphicon glyphicon-pencil spinning"></span></button>', orderable: false},
-            { title: 'Delete', data: null, defaultContent: '<button class="btn btn-sm" onclick="showDeleteDialog(this); return false;"><span class="glyphicon glyphicon-trash spinning"></span></button>', orderable: false}
+            { title: 'Edit', data: null, defaultContent: '<button class="btn btn-sm btn-primary" onclick="editTableRow(this); return false;"><span class="glyphicon glyphicon-pencil spinning"></span></button>', orderable: false},
+            { title: 'Delete', data: null, defaultContent: '<button class="btn btn-sm btn-primary" onclick="showDeleteDialog(this); return false;"><span class="glyphicon glyphicon-trash spinning"></span></button>', orderable: false}
             // delete it without confirmation  { title: 'Delete', data: null, defaultContent: '<button class="btn btn-sm" onclick="deleteTableRow(this); return false;"><span class="glyphicon glyphicon-trash spinning"></span></button>' }
 
         ]

@@ -66,9 +66,8 @@
                             </div>
 
                             <div class="modal-footer" >
-                                <button type="button" data-dismiss="modal" class="btn btn-danger" id="modal-cancelbutton" ><%= CancelButton%></button>
-                                <button class="btn btn-primary" onclick="alert('BAM');return false" id="modal-okbutton" ><%= OkButton%></button>
-
+                                <button type="button" data-dismiss="modal" class="btn btn-danger btnResize" id="modal-cancelbutton" ><%= CancelButton%></button>
+                                <button class="btn btn-primary btnResize" onclick="return false;" id="modal-okbutton" ><%= OkButton%></button>
                             </div>
                         </form>
                     </div>
