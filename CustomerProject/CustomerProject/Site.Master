@@ -1,5 +1,4 @@
 ﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="CustomerProject.SiteMaster" %>
-
 <%@ Register TagPrefix="uc" TagName="FooterArea" Src="~/UserControls/Footer.ascx" %>
 
 <!DOCTYPE html>
@@ -51,19 +50,13 @@
                     </button>
                     <a class="navbar-brand" runat="server" href="~/">Customer Viewer</a>
                 </div>
-               
             </div>
         </div>
         <div class="container body-content">
             <asp:ContentPlaceHolder ID="MainContent" runat="server">
             </asp:ContentPlaceHolder>
-           
+            <uc:FooterArea runat="server" />
         </div>
-
     </form>
-    <hr />
-           <footer class="row">
-                <p>&copy; <%: DateTime.Now.Year %> - Customer Viewer</p>
-            </footer>
 </body>
 </html>
