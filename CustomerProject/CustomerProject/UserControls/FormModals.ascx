@@ -77,7 +77,7 @@
                                 </div>
                             </div>
                             <div class="modal-footer">
-                                <button id="modal-okbutton" type="submit" class="btn btn-default">Submit Entry</button>
+                                <button id="modal-okbutton" type="submit" class="btn btn-primary">Submit</button>
                             </div>
                         </form>
                     </div>

@@ -439,7 +439,10 @@
     <Content Include="Site.Master" />
     <Content Include="UserControls\Dialogs\ConfirmationDialog.ascx" />
     <Content Include="UserControls\Dialogs\ConfirmationDialogControl.ascx" />
-    <Content Include="User_Controls\FormModals.ascx" />
+    <Content Include="UserControls\FormModals.ascx">
+      <BrowseToURL>~/User_Controls/FormModals.ascx</BrowseToURL>
+    </Content>
+    <Content Include="UserControls\Footer.ascx" />
     <Content Include="ViewSwitcher.ascx" />
     <Content Include="Web.config" />
     <Content Include="Bundle.config" />
@@ -522,16 +525,15 @@
     </Compile>
     <Compile Include="UserControls\Dialogs\ConfirmationDialogControl.ascx.cs">
       <DependentUpon>ConfirmationDialogControl.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="UserControls\Dialogs\ConfirmationDialogControl.ascx.designer.cs">
       <DependentUpon>ConfirmationDialogControl.ascx</DependentUpon>
     </Compile>
-    <Compile Include="User_Controls\FormModals.ascx.cs">
+    <Compile Include="UserControls\FormModals.ascx.cs">
       <DependentUpon>FormModals.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="User_Controls\FormModals.ascx.designer.cs">
+    <Compile Include="UserControls\FormModals.ascx.designer.cs">
       <DependentUpon>FormModals.ascx</DependentUpon>
     </Compile>
     <Compile Include="UserControls\Dialogs\ConfirmationDialog.ascx.cs">
@@ -540,6 +542,13 @@
     </Compile>
     <Compile Include="UserControls\Dialogs\ConfirmationDialog.ascx.designer.cs">
       <DependentUpon>ConfirmationDialog.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Footer.ascx.cs">
+      <DependentUpon>Footer.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\Footer.ascx.designer.cs">
+      <DependentUpon>Footer.ascx</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\Customer.cs" />
     <Compile Include="ViewModels\DataTableCustomers.cs" />

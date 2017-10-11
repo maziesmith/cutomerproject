@@ -108,5 +108,29 @@ namespace CustomerProject.Handlers
             }
 
         }
+
+        private void EditCustomer(HttpContext context)
+        {
+
+
+            string jsonString = String.Empty;
+            HttpContext.Current.Request.InputStream.Position = 0;
+            using (StreamReader inputStream =
+            new StreamReader(HttpContext.Current.Request.InputStream))
+            {
+                jsonString = inputStream.ReadToEnd();
+                JavaScriptSerializer jSerialize =
+                    new JavaScriptSerializer();
+                var IdGet = jSerialize.Deserialize<CustomerDetail>(jsonString);
+
+                if (IdGet != null)
+                {
+                    Guid id = IdGet.id;
+                    DataLayer.DeleteCustomer(id);
+
+                }
+            }
+
+        }
     }
 }

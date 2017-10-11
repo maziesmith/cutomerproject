@@ -1,7 +1,7 @@
 ﻿<%@ Page Title="Home Page" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="CustomerProject._Default" %>
 
 <%@ Register TagPrefix="uc" TagName="ConfirmDialog" Src="~/UserControls/Dialogs/ConfirmationDialog.ascx" %>
-<%@ Register TagPrefix="uc" TagName="FormModals" Src="~/User_Controls/FormModals.ascx" %>
+<%@ Register TagPrefix="uc" TagName="FormModals" Src="~/UserControls/FormModals.ascx" %>
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
 
@@ -11,7 +11,6 @@
         function openAddModal() {
             $('#AddButtonModal').modal();
         }
-
 
     </script>
     <br />
@@ -27,15 +26,16 @@
                         </asp:LinkButton>
                     </div>
                 </div>
-                <br/>
+                <br />
                 <div class="col-md-12">
-                    <table id="CustomerTable" class="table table-condensed table-striped table-hover"  cellspacing="0" width="100%"/>
+                    <table id="CustomerTable" class="table table-condensed table-striped table-hover" cellspacing="0" width="100%" />
                 </div>
             </div>
 
             <uc:ConfirmDialog runat="server" />
             <uc:FormModals ID="FormModals"
                 runat="server" />
+
         </ContentTemplate>
     </asp:UpdatePanel>
 </asp:Content>
