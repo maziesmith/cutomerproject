@@ -31,11 +31,24 @@ function loadDataTable(tableID) {
                 title: 'Delete',
                 orderable: false,
                 render: function (data, type, row, meta) {
-                    return '<button class="btn btn-sm" onclick="showDeleteDialog(\'' + row.Name + '\', ' +
-                        'function(){ ajaxDeleteCustomer(\''+ row.ID +'\', function(){ $(\'#' + meta.settings.sTableId + '\').DataTable().ajax.reload(); }); }); return false;">' +
+                    return '<button class="btn btn-sm" onclick="onDeleteClicked(\'' + row.Name + '\', \'' + row.ID +'\', \''+ meta.settings.sTableId + '\'); return false;">' +
                         '<span class="glyphicon glyphicon-trash spinning"></span></button>';
                 }
             }
         ]
     });
+}
+
+function onDeleteClicked(cName, cID, tableID) {
+
+    showDeleteDialog(cName,
+        function () {
+            ajaxDeleteCustomer(
+                cID,
+                function () {
+                    $('#' + tableID).DataTable().ajax.reload();
+                }
+            )
+        }
+    );
 }
