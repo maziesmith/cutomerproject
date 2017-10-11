@@ -1,7 +1,5 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="ConfirmationDialog.ascx.cs" Inherits="CustomerProject.UserControls.Dialogs.ConfirmationDialog" %>
 
-
-
 <script type="text/javascript">
 
     function showBlankModal() {

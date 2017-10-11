@@ -7,13 +7,6 @@
 
     <script type="text/javascript" src="Scripts/Custom/AjaxCalls.js"></script>
     <script type="text/javascript" src="Scripts/Custom/DataTableLoader.js"></script>
-    <script type="text/javascript">
-
-        function openAddModal() {
-            $('#AddButtonModal').modal();
-        }
-
-    </script>
     <br />
     <br />
     <asp:UpdatePanel ID="UpdatePanel" runat="server" UpdateMode="Always">
@@ -29,7 +22,7 @@
                 </div>
                 <br />
                 <div class="col-md-12">
-                    <table id="CustomerTable" class="table table-condensed table-striped table-hover" cellspacing="0" width="100%" ></table>
+                    <table id="CustomerTable" class="table table-condensed table-striped table-hover" cellspacing="0" width="100%"></table>
                 </div>
             </div>
 

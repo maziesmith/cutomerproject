@@ -551,8 +551,9 @@
     <Compile Include="UserControls\Footer.ascx.designer.cs">
       <DependentUpon>Footer.ascx</DependentUpon>
     </Compile>
-    <Compile Include="ViewModels\Customer.cs" />
-    <Compile Include="ViewModels\DataTableCustomers.cs" />
+    <Compile Include="ViewModels\CustomerModel.cs" />
+    <Compile Include="ViewModels\DataTableCustomersModel.cs" />
+    <Compile Include="ViewModels\IDModel.cs" />
     <Compile Include="ViewSwitcher.ascx.cs">
       <DependentUpon>ViewSwitcher.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

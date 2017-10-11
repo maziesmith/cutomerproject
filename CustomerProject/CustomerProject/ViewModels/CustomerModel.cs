@@ -5,14 +5,14 @@ using System.Web;
 
 namespace CustomerProject.ViewModels
 {
-    public class Customer
+    public class CustomerModel : IDModel
     {
-        public Customer()
+        public CustomerModel()
         {
             // empty constructor
         }
 
-        public Customer(Guid ID, String Name, short Age, String Address, long PhoneNumber, String Gender)
+        public CustomerModel(Guid ID, String Name, short Age, String Address, long PhoneNumber, String Gender)
         {
             this.ID = ID;
             this.Name = Name;
@@ -27,6 +27,5 @@ namespace CustomerProject.ViewModels
         public String Address { get; set; }
         public long PhoneNumber { get; set; }
         public String Gender { get; set; }
-        public Guid ID { get; set; }
     }
 }

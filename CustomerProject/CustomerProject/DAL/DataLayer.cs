@@ -9,9 +9,9 @@ namespace CustomerProject.DAL
 {
     public class DataLayer
     {
-        public static List<Customer> GetCustomers()
+        public static List<CustomerModel> GetCustomers()
         {
-            List<Customer> customers = new List<Customer>();
+            List<CustomerModel> customers = new List<CustomerModel>();
 
             using (var db = new CustomerViewerEntities())
             {
@@ -26,7 +26,16 @@ namespace CustomerProject.DAL
             return customers;
         }
 
-        public static void AddCustomer(Customer customer)
+        public static CustomerModel GetCustomer(Guid id)
+        {
+            using (var db = new CustomerViewerEntities())
+            {
+                CustomerDetail dbCustomer = db.CustomerDetails.FirstOrDefault(c => c.id == id);
+                return CustomerModelMapper.convertEntityToCustomer(dbCustomer);
+            }
+        }
+
+        public static void AddCustomer(CustomerModel customer)
         {
             using (var db = new CustomerViewerEntities())
             {
@@ -43,6 +52,17 @@ namespace CustomerProject.DAL
                 var customerToDelete = new CustomerDetail { id = id };
                 db.CustomerDetails.Attach(customerToDelete);
                 db.CustomerDetails.Remove(customerToDelete);
+                db.SaveChanges();
+            }
+        }
+
+        public static void EditCustomer(CustomerModel editedCustomer)
+        {
+            using (var db = new CustomerViewerEntities())
+            {
+                var dbEditedCustomer = CustomerModelMapper.convertCustomerToEntity(editedCustomer);
+                db.CustomerDetails.Attach(dbEditedCustomer);
+                db.Entry(dbEditedCustomer).State = System.Data.Entity.EntityState.Modified;
                 db.SaveChanges();
             }
         }
