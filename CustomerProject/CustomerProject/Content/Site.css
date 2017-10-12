@@ -8,10 +8,6 @@ body {
     margin-bottom: 10px;
 }
 
-#CustomerTable th:nth-child(1), td:nth-child(1) {
-    display: none;
-}
-
 .navbar-brand {
     color: #428bca !important;
 }
@@ -28,4 +24,14 @@ footer {
 
 #CustomerTable tr th {
     background-color: #c3c3c3 !important;
+}
+
+#searchInput {
+    width: 200px !important;
+    float: right;
+    margin-bottom: -20px;
+}
+
+.searchInput {
+    margin-bottom: -20px;
 }

@@ -19,6 +19,7 @@ namespace CustomerProject.Handlers
         private const string OPERATION_DELETE_CUSTOMER = "DeleteCustomer";
         private const string OPERATION_EDIT_CUSTOMER = "EditCustomer";
         private const string OPERATION_ADD_CUSTOMER = "AddCustomer";
+        private const string OPERATION_SEARCH_CUSTOMERS = "SearchCustomers";
 
         public void ProcessRequest(HttpContext context)
         {
@@ -39,6 +40,10 @@ namespace CustomerProject.Handlers
                         break;
                     case OPERATION_EDIT_CUSTOMER:
                         EditCustomer(context);
+                        SerializeJSON(context, "");
+                        break;
+                    case OPERATION_SEARCH_CUSTOMERS:
+                        SearchCustomers(context);
                         SerializeJSON(context, "");
                         break;
                     //other methods
@@ -107,8 +112,6 @@ namespace CustomerProject.Handlers
 
         private void EditCustomer(HttpContext context)
         {
-
-
             string jsonString = String.Empty;
             HttpContext.Current.Request.InputStream.Position = 0;
             using (StreamReader inputStream =
@@ -123,10 +126,14 @@ namespace CustomerProject.Handlers
                 {
                     Guid id = IdGet.id;
                     DataLayer.DeleteCustomer(id);
-
                 }
             }
+        }
 
+        private void SearchCustomers(HttpContext context)
+        {
+            Customer c = getCustomerFromJSON(context);
+            DataLayer.SearchCustomers(c);
         }
     }
 }

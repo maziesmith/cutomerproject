@@ -11,18 +11,28 @@ namespace CustomerProject.DAL
     {
         public static List<Customer> GetCustomers()
         {
-            List<Customer> customers = new List<Customer>();
+            return GetCustomers(String.Empty);
+        }
 
+        public static List<Customer> GetCustomers(string nameFilter)
+        {
+            List<Customer> customers = new List<Customer>();
             using (var db = new CustomerViewerEntities())
             {
-                List<CustomerDetail> dbCustomers = db.CustomerDetails.ToList();
+                IQueryable<CustomerDetail> dbCustomers = db.CustomerDetails;
 
-                foreach(CustomerDetail entity in dbCustomers)
+                if (!String.IsNullOrEmpty(nameFilter))
+                {
+                    dbCustomers = dbCustomers.Where(c => c.name.Contains(nameFilter));
+                }
+
+                List<CustomerDetail> dbCustomersList = dbCustomers.ToList();
+
+                foreach(CustomerDetail entity in dbCustomersList)
                 {
                     customers.Add(CustomerModelMapper.convertEntityToCustomer(entity));
                 }
             }
-
             return customers;
         }
 
@@ -45,6 +55,30 @@ namespace CustomerProject.DAL
                 db.CustomerDetails.Remove(customerToDelete);
                 db.SaveChanges();
             }
+        }
+
+        public static List<Customer> SearchCustomers(String searchString)
+        {
+            // creating fucntion to get customers from db,
+            // passing parameter from search input as searchString
+
+            List<Customer> customers = new List<Customer>();
+            using (var db = new CustomerViewerEntities())
+            {
+                List<CustomerDetail> dbCustomers = 
+                    db.CustomerDetails
+                    .Where(c => c.name.Contains(searchString))
+                    .ToList();
+
+                /*foreach (CustomerDetail entity in dbCustomers)
+                {
+                    if (entity.name == searchString)
+                    {
+                        customers.Add(CustomerModelMapper.convertEntityToCustomer(entity));
+                    }
+                }*/
+            }
+            return customers;
         }
     }
 }

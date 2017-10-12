@@ -5,23 +5,20 @@
         var errorMessage = validateCustomer();
 
         if (errorMessage === undefined) {
-            sendAJAX(
-                OPERATION_ADD_CUSTOMER,
-                JSON.stringify({
-                    Name: $('#inputName').val(),
-                    Age: $('#inputAge').val(),
-                    Address: $('#inputAddress').val(),
-                    PhoneNumber: $('#inputNumber').val(),
-                    Gender: $('input[name=inputGender]:checked').val()
-                }),
+
+            var newCustomer = {
+                Name: $('#inputName').val(),
+                Age: $('#inputAge').val(),
+                Address: $('#inputAddress').val(),
+                PhoneNumber: $('#inputNumber').val(),
+                Gender: $('input[name=inputGender]:checked').val()
+            }
+
+            ajaxAddCustomer(newCustomer,
                 function (response) {
                     $('#AddButtonModal').modal('hide');
                     $('#CustomerTable').DataTable().ajax.reload();
-                },
-                function (response) {
-                    alert('Error: ' + response.statusText);
-                }
-            );
+                });
         }
         else {
             alert(errorMessage);

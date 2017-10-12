@@ -5,7 +5,7 @@
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
 
-    <script type="text/javascript" src="Scripts/Custom/Helpers.js"></script>
+    <script type="text/javascript" src="Scripts/Custom/AjaxCalls.js"></script>
     <script type="text/javascript" src="Scripts/Custom/DataTableLoader.js"></script>
     <script type="text/javascript">
 
@@ -29,6 +29,12 @@
                 </div>
                 <br />
                 <div class="col-md-12">
+                    <div class="input-group searchInput">
+                        <input type="text" class="form-control" placeholder="Search" name="searchInput" id="searchInput">
+                        <div class="input-group-btn">
+                            <button class="btn btn-default" onclick="searchCustomers(document.getElementById('searchInput').value)"><i class="glyphicon glyphicon-search"></i></button>
+                        </div>
+                    </div>
                     <table id="CustomerTable" class="table table-condensed table-striped table-hover" cellspacing="0" width="100%"></table>
                 </div>
             </div>
