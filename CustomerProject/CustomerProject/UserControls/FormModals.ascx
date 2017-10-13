@@ -1,7 +1,18 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="FormModals.ascx.cs" Inherits="CustomerProject.User_Controls.FormModals" %>
 
 <script type="text/javascript">
-    function addCustomer() {
+
+    function openFormModal(title) {
+
+        $('#FormModal').modal();
+
+        if (title !== undefined) {
+            $('#FormModalTitle').text(title);
+        }
+    }
+
+    function addOrEditCustomer() {
+
         var errorMessage = validateCustomer();
 
         if (errorMessage === undefined) {
@@ -14,18 +25,33 @@
                 Gender: $('input[name=inputGender]:checked').val()
             }
 
-            ajaxAddCustomer(newCustomer,
-                function (response) {
-                    $('#AddButtonModal').modal('hide');
-                    $('#CustomerTable').DataTable().ajax.reload();
-                });
-        }
-        else {
+            var customerID = $('#editID').text();
+
+            if (customerID !== '') { // if editing...
+
+                newCustomer['ID'] = customerID;
+
+                ajaxEditCustomer(newCustomer,
+                    function (response) {
+                        $('#FormModal').modal('hide');
+                        $('#CustomerTable').DataTable().ajax.reload();
+                    });
+
+            } else {
+
+                ajaxAddCustomer(newCustomer,
+                    function (response) {
+                        $('#FormModal').modal('hide');
+                        $('#CustomerTable').DataTable().ajax.reload();
+                    });
+            }
+        } else {
             alert(errorMessage);
         }
     }
 
     function validateCustomer() {
+
         var errorMessage;
 
         if ($('#inputName').val() === '') {
@@ -41,21 +67,37 @@
         }
         return errorMessage;
     }
+
+    function populateFormModalFields(customer) {
+
+        if (customer.ID !== undefined) {
+            $('#editID').text(customer.ID);
+        }
+
+        $('#inputName').val(customer.Name);
+        $('#inputNumber').val(customer.PhoneNumber);
+        $('#inputAge').val(customer.Age);
+        $('#inputAddress').val(customer.Address);
+
+        customer.Gender === 'M' ? $("#inputGenderMale").prop("checked", true) : $("#inputGenderFemale").prop("checked", true)
+    }
 </script>
 
 
 <!-- Bootstrap Modal Dialog -->
-<div class="modal fade" id="AddButtonModal" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal fade" id="FormModal" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <asp:UpdatePanel ID="upModal" runat="server" ChildrenAsTriggers="false" UpdateMode="Conditional">
             <ContentTemplate>
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                        <h4 class="modal-title">
-                            <asp:Literal ID="modalTitle" runat="server" /></h4>
+                        <h4 class="modal-title" id="FormModalTitle">
+                            <asp:Literal ID="modalTitle" runat="server" />
+                        </h4>
                     </div>
                     <div class="modal-body">
+                        <p style="display:none" id="editID"></p>
                         <form id="addCustomerForm" class="form-horizontal" method="post" action="Default.aspx.cs">
                             <div class="form-group row">
                                 <label class="control-label col-md-2" for="name">Name</label>
@@ -67,10 +109,10 @@
                                 <label class="control-label col-md-2" for="inputGender">Gender</label>
                                 <div class="col-md-10">
                                     <label class="radio-inline">
-                                        <input type="radio" name="inputGender" value="M">Male
+                                        <input type="radio" id="inputGenderMale" name="inputGender" value="M">Male
                                     </label>
                                     <label class="radio-inline">
-                                        <input type="radio" name="inputGender" value="F">Female
+                                        <input type="radio" id="inputGenderFemale" name="inputGender" value="F">Female
                                     </label>
                                 </div>
                             </div>
@@ -93,7 +135,7 @@
                                 </div>
                             </div>
                             <div class="modal-footer">
-                                <button class="btn btn-primary btnResize" onclick="addCustomer(); return false;">OK</button>
+                                <button class="btn btn-default" onclick="addOrEditCustomer(); return false;">Submit Entry</button>
                             </div>
                         </form>
                     </div>

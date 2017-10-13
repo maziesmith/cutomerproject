@@ -7,13 +7,6 @@
 
     <script type="text/javascript" src="Scripts/Custom/AjaxCalls.js"></script>
     <script type="text/javascript" src="Scripts/Custom/DataTableLoader.js"></script>
-    <script type="text/javascript">
-
-        function openAddModal() {
-            $('#AddButtonModal').modal();
-        }
-
-    </script>
     <br />
     <br />
     <asp:UpdatePanel ID="UpdatePanel" runat="server" UpdateMode="Always">

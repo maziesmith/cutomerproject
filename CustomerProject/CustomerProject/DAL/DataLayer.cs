@@ -9,34 +9,33 @@ namespace CustomerProject.DAL
 {
     public class DataLayer
     {
-        public static List<Customer> GetCustomers()
+        public static List<CustomerModel> GetCustomers()
         {
-            return GetCustomers(String.Empty);
-        }
+            List<CustomerModel> customers = new List<CustomerModel>();
 
-        public static List<Customer> GetCustomers(string nameFilter)
-        {
-            List<Customer> customers = new List<Customer>();
             using (var db = new CustomerViewerEntities())
             {
-                IQueryable<CustomerDetail> dbCustomers = db.CustomerDetails;
+                List<CustomerDetail> dbCustomers = db.CustomerDetails.ToList();
 
-                if (!String.IsNullOrEmpty(nameFilter))
-                {
-                    dbCustomers = dbCustomers.Where(c => c.name.Contains(nameFilter));
-                }
-
-                List<CustomerDetail> dbCustomersList = dbCustomers.ToList();
-
-                foreach(CustomerDetail entity in dbCustomersList)
+                foreach(CustomerDetail entity in dbCustomers)
                 {
                     customers.Add(CustomerModelMapper.convertEntityToCustomer(entity));
                 }
             }
+
             return customers;
         }
 
-        public static void AddCustomer(Customer customer)
+        public static CustomerModel GetCustomer(Guid id)
+        {
+            using (var db = new CustomerViewerEntities())
+            {
+                CustomerDetail dbCustomer = db.CustomerDetails.FirstOrDefault(c => c.id == id);
+                return CustomerModelMapper.convertEntityToCustomer(dbCustomer);
+            }
+        }
+
+        public static void AddCustomer(CustomerModel customer)
         {
             using (var db = new CustomerViewerEntities())
             {
@@ -57,28 +56,15 @@ namespace CustomerProject.DAL
             }
         }
 
-        public static List<Customer> SearchCustomers(String searchString)
+        public static void EditCustomer(CustomerModel editedCustomer)
         {
-            // creating fucntion to get customers from db,
-            // passing parameter from search input as searchString
-
-            List<Customer> customers = new List<Customer>();
             using (var db = new CustomerViewerEntities())
             {
-                List<CustomerDetail> dbCustomers = 
-                    db.CustomerDetails
-                    .Where(c => c.name.Contains(searchString))
-                    .ToList();
-
-                /*foreach (CustomerDetail entity in dbCustomers)
-                {
-                    if (entity.name == searchString)
-                    {
-                        customers.Add(CustomerModelMapper.convertEntityToCustomer(entity));
-                    }
-                }*/
+                var dbEditedCustomer = CustomerModelMapper.convertCustomerToEntity(editedCustomer);
+                db.CustomerDetails.Attach(dbEditedCustomer);
+                db.Entry(dbEditedCustomer).State = System.Data.Entity.EntityState.Modified;
+                db.SaveChanges();
             }
-            return customers;
         }
     }
 }

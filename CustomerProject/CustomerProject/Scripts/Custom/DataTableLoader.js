@@ -1,10 +1,6 @@
-﻿var dataTableID;
+﻿function loadDataTable(tableID) {
 
-function loadDataTable(tableID) {
-
-    dataTableID = '#' + tableID;
-
-    $(dataTableID).DataTable({
+    $('#' + tableID).DataTable({
         ajax: getOperationURL(URL_CUSTOMER_TABLE_HANDLER, OPERATION_GET_CUSTOMERS),
         paging: true,
         info: true,
@@ -23,7 +19,7 @@ function loadDataTable(tableID) {
                 title: 'Edit',
                 orderable: false,
                 render: function (data, type, row, meta) {
-                    return '<button class="btn btn-sm btn-primary" onclick="return false;">' +
+                    return '<button class="btn btn-sm" onclick="onEditClicked(\'' + row.ID + '\'); return false;">' +
                         '<span class="glyphicon glyphicon-pencil spinning"></span></button>';
                 }
             },
@@ -31,7 +27,7 @@ function loadDataTable(tableID) {
                 title: 'Delete',
                 orderable: false,
                 render: function (data, type, row, meta) {
-                    return '<button class="btn btn-sm btn-primary" onclick="onDeleteClicked(\'' + row.Name + '\', \'' + row.ID +'\', \''+ meta.settings.sTableId + '\'); return false;">' +
+                    return '<button class="btn btn-sm" onclick="onDeleteClicked(\'' + row.Name + '\', \'' + row.ID + '\', \'' + meta.settings.sTableId + '\'); return false;">' +
                         '<span class="glyphicon glyphicon-trash spinning"></span></button>';
                 }
             }
@@ -48,9 +44,21 @@ function onDeleteClicked(cName, cID, tableID) {
                 function () {
                     $('#' + tableID).DataTable().ajax.reload();
                 }
-            )
+            );
         }
     );
+}
+
+function onEditClicked(cID) {
+
+    ajaxGetCustomer(cID,
+        function (response) {
+            if (response !== null && response !== undefined) {
+                openFormModal('Edit Customer');
+                populateFormModalFields(response);
+            }
+        });
+}
 }
 function searchCustomers(searchString, tableID) {
     
