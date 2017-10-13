@@ -1,5 +1,4 @@
 ﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="CustomerProject.SiteMaster" %>
-
 <%@ Register TagPrefix="uc" TagName="FooterArea" Src="~/UserControls/Footer.ascx" %>
 
 <!DOCTYPE html>
@@ -41,7 +40,7 @@
             </Scripts>
         </asp:ScriptManager>
 
-        <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="navbar navbar-default navbar-fixed-top">
             <div class="container">
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">

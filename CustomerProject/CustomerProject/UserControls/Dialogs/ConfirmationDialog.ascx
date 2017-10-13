@@ -1,27 +1,21 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="ConfirmationDialog.ascx.cs" Inherits="CustomerProject.UserControls.Dialogs.ConfirmationDialog" %>
 
-
-
 <script type="text/javascript">
 
     function showBlankModal() {
         $('#ConfirmationDialog').modal();
     }
 
-
-    function showDeleteDialog(sender) {
-        initFields("Delete User", "Are you sure you want to delete this user: <b>" + getName(sender) + "</b>", '<%= CancelButton%>');
+    function showDeleteDialog(name, okFunction) {
+        initFields("Delete User", "Are you sure you want to delete this user: <b>" + name + "</b>", "Cancel");
         document.getElementById("modal-okbutton").innerHTML = "Remove";
-        document.getElementById("modal-okbutton").onclick = function () { deleteUser(sender); return false;};
+        document.getElementById("modal-okbutton").onclick = function () { hideConfirmationDialog(); okFunction(); return false; };
     }
 
-    function deleteUser(sender) {
+    function hideConfirmationDialog() {
         $('#ConfirmationDialog').modal('toggle');
-        //function of DataTableLoader.js
-        deleteTableRow(sender);
     }
 
- 
     function showInfoDialog(title, mssg, cancelbutton) {
         initFields(title, mssg, cancelbutton);
         document.getElementById("modal-okbutton").style = "display:none;";
@@ -32,17 +26,7 @@
         document.getElementById("modal-title").innerHTML = title;
         document.getElementById("modal-message").innerHTML = mssg;
         document.getElementById("modal-cancelbutton").innerHTML = cancelbutton;
-       
     }
-
-    function getName(sender) {
-        return $(sender).parent().siblings(':nth-child(2)').html();
-   
-    }
-
-   // function getID(sender) {
-   //    return $(sender).parent().siblings(':first').html();
-   // }
 
 </script>
 
@@ -66,9 +50,8 @@
                             </div>
 
                             <div class="modal-footer" >
-                                <button type="button" data-dismiss="modal" class="btn btn-danger" id="modal-cancelbutton" ></button>
-                                <button class="btn btn-primary" onclick="alert('BAM');return false" id="modal-okbutton" ><%= OkButton%></button>
-
+                                <button type="button" data-dismiss="modal" class="btn btn-danger btnResize" id="modal-cancelbutton" ><%= CancelButton%></button>
+                                <button class="btn btn-primary btnResize" onclick="return false;" id="modal-okbutton" ><%= OkButton%></button>
                             </div>
                         </form>
                     </div>

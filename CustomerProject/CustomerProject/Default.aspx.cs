@@ -2,15 +2,12 @@
 using CustomerProject.DAL;
 using CustomerProject.Functions;
 using CustomerProject.User_Controls;
-using CustomerProject.UserControls;
-using CustomerProject.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Reflection;
 using System.Resources;
 using System.Web.Services;
 using System.Web.UI;
-using System.Web.UI.WebControls;
 
 namespace CustomerProject
 {
@@ -39,9 +36,8 @@ namespace CustomerProject
 
         protected void btnAdd_Click(object sender, EventArgs e)
         {
-            
             FormModals.Title = "Add Customer";
-            ScriptManager.RegisterStartupScript(Page, Page.GetType(), "openAddModal", "openAddModal();", true);
+            ScriptManager.RegisterStartupScript(Page, Page.GetType(), "openFormModal", "openFormModal();", true);
         }
     }
 }

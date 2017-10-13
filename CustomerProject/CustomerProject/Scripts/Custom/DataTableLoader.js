@@ -1,55 +1,82 @@
-﻿function loadDataTable(tableID) {
+﻿function loadDataTable(tableID, searchID) {
 
     $('#' + tableID).DataTable({
-        ajax: baseURL + OPERATION_GET_CUSTOMERS,
-        "paging": true,
-        "info": true,
-        "searching": true,
-        "oLanguage": {
+        ajax: {
+            type: 'POST',
+            url: getOperationURL(URL_CUSTOMER_TABLE_HANDLER, OPERATION_GET_CUSTOMERS),
+            contentType: 'text/plain',
+            data: function () {
+                var searchString = $('#' + searchID).val();
+                return searchString === '' ? null : searchString;
+            }
+        },
+        paging: true,
+        info: true,
+        searching: false,
+        oLanguage: {
             "sLengthMenu": "Display Records (per page)  _MENU_",
             "sSearch": "Search "
         },
         columns: [
-            { title: 'ID', data: 'ID', orderable: true},
-            { title: 'Name', data: 'Name', orderable: true},
-            { title: 'Gender', data: 'Gender', orderable: true},
-            { title: 'Number', data: 'PhoneNumber', orderable: true},
-            { title: 'Age', data: 'Age', orderable: true},
-            { title: 'Address', data: 'Address', orderable: true},
-            { title: 'Edit', data: null, defaultContent: '<button class="btn btn-sm" onclick="editTableRow(this); return false;"><span class="glyphicon glyphicon-pencil spinning"></span></button>', orderable: false},
-            { title: 'Delete', data: null, defaultContent: '<button class="btn btn-sm" onclick="showDeleteDialog(this); return false;"><span class="glyphicon glyphicon-trash spinning"></span></button>', orderable: false}
-            // delete it without confirmation  { title: 'Delete', data: null, defaultContent: '<button class="btn btn-sm" onclick="deleteTableRow(this); return false;"><span class="glyphicon glyphicon-trash spinning"></span></button>' }
-
+            { title: 'Name', data: 'Name', orderable: true },
+            { title: 'Gender', data: 'Gender', orderable: true },
+            { title: 'Number', data: 'PhoneNumber', orderable: true },
+            { title: 'Age', data: 'Age', orderable: true },
+            { title: 'Address', data: 'Address', orderable: true },
+            {
+                title: 'Edit',
+                orderable: false,
+                render: function (data, type, row, meta) {
+                    return '<button class="btn btn-sm btn-primary" onclick="onEditClicked(\'' + row.ID + '\'); return false;">' +
+                        '<span class="glyphicon glyphicon-pencil spinning"></span></button>';
+                }
+            },
+            {
+                title: 'Delete',
+                orderable: false,
+                render: function (data, type, row, meta) {
+                    return '<button class="btn btn-sm btn-primary" onclick="onDeleteClicked(\'' + row.Name + '\', \'' + row.ID + '\', \'' + meta.settings.sTableId + '\'); return false;">' +
+                        '<span class="glyphicon glyphicon-trash spinning"></span></button>';
+                }
+            }
         ]
     });
 }
 
-function deleteTableRow(sender) {
+function onDeleteClicked(cName, cID, tableID) {
 
-    var idToDelete = $(sender).parent().siblings(':first').html();
+    showDeleteDialog(cName,
+        function () {
+            ajaxDeleteCustomer(
+                cID,
+                function () {
+                    $('#' + tableID).DataTable().ajax.reload();
+                }
+            );
+        }
+    );
+}
 
-    sendAJAX(
-        OPERATION_DELETE_CUSTOMER,
-        JSON.stringify({ ID: idToDelete }),
+function onEditClicked(cID) {
+
+    ajaxGetCustomer(cID,
         function (response) {
-            $(sender).parents('table').DataTable().ajax.reload();
-        },
-        function (response) {
-            alert('Error: ' + response.statusText);
+            if (response !== null && response !== undefined) {
+                openFormModal('Edit Customer');
+                populateFormModalFields(response);
+            }
         });
 }
 
-function editTableRow(sender) {
-
-    var idToEdit = $(sender).parent().siblings(':first').html();
-
-    sendAJAX(
-        OPERATION_EDIT_CUSTOMER,
-        JSON.stringify({ id: idToEdit }),
+function searchCustomers(searchString) {
+    /*ajaxGetCustomers(searchString,
         function (response) {
-            $(sender).parents('table').DataTable().ajax.reload();
-        },
-        function (response) {
-            alert('Error: ' + response.statusText);
-        });
+            if (response !== null && response !== undefined) {
+               //$('#CustomerTable').DataTable().ajax.reload();
+            }
+        });*/
+
+    //$('#CustomerTable').DataTable().ajax.data = searchString;
+    $('#CustomerTable').DataTable().ajax.reload();
+    //$('#CustomerTable').DataTable().ajax.data = null;
 }

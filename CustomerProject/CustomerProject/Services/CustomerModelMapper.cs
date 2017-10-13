@@ -6,9 +6,9 @@ namespace CustomerProject.Functions
 {
     public class CustomerModelMapper
     {
-        public static Customer convertEntityToCustomer(CustomerDetail entity)
+        public static CustomerModel convertEntityToCustomer(CustomerDetail entity)
         {
-            Customer c = new Customer
+            CustomerModel c = new CustomerModel
             (
                 entity.id,
                 entity.name,
@@ -21,7 +21,7 @@ namespace CustomerProject.Functions
             return c;
         }
 
-        public static CustomerDetail convertCustomerToEntity(Customer c)
+        public static CustomerDetail convertCustomerToEntity(CustomerModel c)
         {
             CustomerDetail entity = new CustomerDetail
             {
