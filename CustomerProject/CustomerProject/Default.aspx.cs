@@ -1,10 +1,13 @@
-﻿using CustomerProject.DAL;
+﻿using CustomerProject.App_GlobalResources;
+using CustomerProject.DAL;
 using CustomerProject.Functions;
 using CustomerProject.User_Controls;
 using CustomerProject.UserControls;
 using CustomerProject.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.Reflection;
+using System.Resources;
 using System.Web.Services;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -16,6 +19,7 @@ namespace CustomerProject
         protected void Page_Load(object sender, EventArgs e)
         {
             runScript("loadDataTable('CustomerTable');");
+            ConfirmDialog.CancelButton = GetGlobalResourceObject("Resource", "modal_cancel").ToString();
         }
 
         private void displayAlert(string message)

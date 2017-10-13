@@ -23,3 +23,15 @@ body {
 .navbar-brand {
     color: white !important;
 }
+
+#LanguageMenu img{
+    width:15px;
+}
+
+.level1:hover {
+    color: #428bca;
+}
+
+.level1 {
+    color: white !important;
+}

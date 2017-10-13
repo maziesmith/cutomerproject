@@ -10,7 +10,7 @@
 
 
     function showDeleteDialog(sender) {
-        initFields("Delete User", "Are you sure to delete this user: <b>" + getName(sender) + "</b>", "Cancel");
+        initFields("Delete User", "Are you sure you want to delete this user: <b>" + getName(sender) + "</b>", '<%= CancelButton%>');
         document.getElementById("modal-okbutton").innerHTML = "Remove";
         document.getElementById("modal-okbutton").onclick = function () { deleteUser(sender); return false;};
     }
@@ -66,7 +66,7 @@
                             </div>
 
                             <div class="modal-footer" >
-                                <button type="button" data-dismiss="modal" class="btn btn-danger" id="modal-cancelbutton" ><%= CancelButton%></button>
+                                <button type="button" data-dismiss="modal" class="btn btn-danger" id="modal-cancelbutton" ></button>
                                 <button class="btn btn-primary" onclick="alert('BAM');return false" id="modal-okbutton" ><%= OkButton%></button>
 
                             </div>

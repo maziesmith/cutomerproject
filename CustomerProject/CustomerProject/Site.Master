@@ -1,4 +1,5 @@
 ﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="CustomerProject.SiteMaster" %>
+
 <%@ Register TagPrefix="uc" TagName="FooterArea" Src="~/UserControls/Footer.ascx" %>
 
 <!DOCTYPE html>
@@ -48,7 +49,31 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" runat="server" href="~/">Customer Viewer</a>
+                    <a ID="pageTitle" class="navbar-brand" runat="server" href="~/"><%=Resources.Resource.page_title %></a>
+                </div>
+                <div class="navbar-collapse collapse navbar-right">
+                    <asp:Menu ID="LanguageMenu"
+                        runat="server"
+                        Orientation="Horizontal"
+                        StaticDisplayLevels="1"
+                        StaticEnableDefaultPopOutImage="False"
+                        MaximumDynamicDisplayLevels="10"
+                        EnableViewState="false"
+                        CssClass="nav navbar-nav navbar-right"
+                        StaticMenuStyle-CssClass="nav navbar-nav navbar-right"
+                        StaticSelectedStyle-CssClass="active"
+                        DynamicMenuStyle-CssClass="dropdown-menu"
+                        IncludeStyleBlock="false"
+                        onmenuitemclick="Language_MenuItemClick"
+                        SkipLinkText=""
+                        RenderingMode="List">
+                        <Items>
+                            <asp:MenuItem Text="Language" ToolTip="Language">
+                                <asp:MenuItem ImageUrl="~/Icons/german_flag.svg" Text=" German" ToolTip="German" />
+                                <asp:MenuItem ImageUrl="~/Icons/english_flag.svg" Text=" English" ToolTip="English" />
+                            </asp:MenuItem>
+                        </Items>
+                    </asp:Menu>
                 </div>
             </div>
         </div>

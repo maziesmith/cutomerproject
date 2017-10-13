@@ -23,7 +23,7 @@
                     <div class="btn-group">
                         <asp:LinkButton ID="addButton" class="btn btn-primary addbutton" runat="server"
                             OnClick="btnAdd_Click">
-                    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>  Add Customer
+                    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>  <%=Resources.Resource.modal_addTitle%>
                         </asp:LinkButton>
                     </div>
                 </div>
@@ -34,9 +34,8 @@
                 </div>
             </div>
 
-            <uc:ConfirmDialog runat="server" />
-            <uc:FormModals ID="FormModals"
-                runat="server" />
+            <uc:ConfirmDialog ID="ConfirmDialog" runat="server" CancelButton="" />
+            <uc:FormModals ID="FormModals" runat="server" />
 
         </ContentTemplate>
     </asp:UpdatePanel>

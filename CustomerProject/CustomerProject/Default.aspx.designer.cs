@@ -31,6 +31,15 @@ namespace CustomerProject {
         protected global::System.Web.UI.WebControls.LinkButton addButton;
         
         /// <summary>
+        /// ConfirmDialog control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::CustomerProject.UserControls.Dialogs.ConfirmationDialog ConfirmDialog;
+        
+        /// <summary>
         /// FormModals control.
         /// </summary>
         /// <remarks>
