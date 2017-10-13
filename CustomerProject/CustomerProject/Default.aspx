@@ -7,6 +7,11 @@
 
     <script type="text/javascript" src="Scripts/Custom/AjaxCalls.js"></script>
     <script type="text/javascript" src="Scripts/Custom/DataTableLoader.js"></script>
+    <script type="text/javascript">
+        function reloadDataTable() {
+            $('#CustomerTable').DataTable().ajax.reload();
+        }
+    </script>
     <br />
     <br />
     <asp:UpdatePanel ID="UpdatePanel" runat="server" UpdateMode="Always">
@@ -25,7 +30,7 @@
                     <div class="input-group searchInput">
                         <input type="text" class="form-control" placeholder="Search" name="searchInput" id="searchInput">
                         <div class="input-group-btn">
-                            <button class="btn btn-default" onclick="searchCustomers(document.getElementById('searchInput').value)"><i class="glyphicon glyphicon-search"></i></button>
+                            <button class="btn btn-default" onclick="reloadDataTable(); return false;"><i class="glyphicon glyphicon-search"></i></button>
                         </div>
                     </div>
                     <table id="CustomerTable" class="table table-condensed table-striped table-hover" cellspacing="0" width="100%"></table>

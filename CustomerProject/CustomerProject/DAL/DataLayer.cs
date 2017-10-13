@@ -11,13 +11,25 @@ namespace CustomerProject.DAL
     {
         public static List<CustomerModel> GetCustomers()
         {
+            return GetCustomers(String.Empty);
+        }
+
+        public static List<CustomerModel> GetCustomers(string searchFilter)
+        {
             List<CustomerModel> customers = new List<CustomerModel>();
 
             using (var db = new CustomerViewerEntities())
             {
-                List<CustomerDetail> dbCustomers = db.CustomerDetails.ToList();
+                IQueryable<CustomerDetail> dbCustomers = db.CustomerDetails;
 
-                foreach(CustomerDetail entity in dbCustomers)
+                if (!string.IsNullOrEmpty(searchFilter))
+                {
+                    dbCustomers = dbCustomers.Where(c => c.name.Contains(searchFilter));
+                }
+
+                List<CustomerDetail> dbCustomerList = dbCustomers.ToList();
+
+                foreach(CustomerDetail entity in dbCustomerList)
                 {
                     customers.Add(CustomerModelMapper.convertEntityToCustomer(entity));
                 }

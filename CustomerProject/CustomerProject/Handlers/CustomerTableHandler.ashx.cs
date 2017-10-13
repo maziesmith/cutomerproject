@@ -20,7 +20,6 @@ namespace CustomerProject.Handlers
         private const string OPERATION_DELETE_CUSTOMER = "DeleteCustomer";
         private const string OPERATION_EDIT_CUSTOMER = "EditCustomer";
         private const string OPERATION_ADD_CUSTOMER = "AddCustomer";
-        private const string OPERATION_SEARCH_CUSTOMERS = "SearchCustomers";
 
         public void ProcessRequest(HttpContext context)
         {
@@ -29,7 +28,7 @@ namespace CustomerProject.Handlers
                 switch (context.Request[OPERATION_PARAMETER])
                 {
                     case OPERATION_GET_CUSTOMERS:
-                        SerializeJSON(context, GetCustomers());
+                        SerializeJSON(context, GetCustomers(context));
                         break;
                     case OPERATION_GET_CUSTOMER:
                         SerializeJSON(context, GetCustomer(context));
@@ -44,10 +43,6 @@ namespace CustomerProject.Handlers
                         break;
                     case OPERATION_EDIT_CUSTOMER:
                         EditCustomer(context);
-                        SerializeJSON(context, "");
-                        break;
-                    case OPERATION_SEARCH_CUSTOMERS:
-                        SearchCustomers(context);
                         SerializeJSON(context, "");
                         break;
                     //other methods
@@ -78,11 +73,12 @@ namespace CustomerProject.Handlers
             context.Response.Write(serializer.Serialize(serializableObject));
         }
 
-        private DataTableCustomersModel GetCustomers()
+        private DataTableCustomersModel GetCustomers(HttpContext context)
         {
+            String searchString = GetContextString(context);
             return new DataTableCustomersModel
             {
-                data = DataLayer.GetCustomers()
+                data = DataLayer.GetCustomers(searchString)
             };
         }
 
@@ -120,16 +116,20 @@ namespace CustomerProject.Handlers
             DataLayer.EditCustomer(c);
         }
 
-        private T GetObjectFromJSON<T>(HttpContext context)
+        private string GetContextString(HttpContext context)
         {
-            string jsonString = String.Empty;
             context.Request.InputStream.Position = 0;
             using (StreamReader inputStream = new StreamReader(context.Request.InputStream))
             {
-                jsonString = inputStream.ReadToEnd();
-                JavaScriptSerializer jSerialize = new JavaScriptSerializer();
-                return jSerialize.Deserialize<T>(jsonString);
+                return inputStream.ReadToEnd();
             }
+        }
+
+        private T GetObjectFromJSON<T>(HttpContext context)
+        {
+            string jsonString = GetContextString(context);
+            JavaScriptSerializer jSerialize = new JavaScriptSerializer();
+            return jSerialize.Deserialize<T>(jsonString);
         }
     }
 }

@@ -8,7 +8,7 @@ namespace CustomerProject
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            runScript("loadDataTable('CustomerTable');");
+            runScript("loadDataTable('CustomerTable', 'searchInput');");
         }
 
         private void displayAlert(string message)

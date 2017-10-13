@@ -1,7 +1,15 @@
-﻿function loadDataTable(tableID) {
+﻿function loadDataTable(tableID, searchID) {
 
     $('#' + tableID).DataTable({
-        ajax: getOperationURL(URL_CUSTOMER_TABLE_HANDLER, OPERATION_GET_CUSTOMERS),
+        ajax: {
+            type: 'POST',
+            url: getOperationURL(URL_CUSTOMER_TABLE_HANDLER, OPERATION_GET_CUSTOMERS),
+            contentType: 'text/plain',
+            data: function () {
+                var searchString = $('#' + searchID).val();
+                return searchString === '' ? null : searchString;
+            }
+        },
         paging: true,
         info: true,
         searching: false,
@@ -19,7 +27,7 @@
                 title: 'Edit',
                 orderable: false,
                 render: function (data, type, row, meta) {
-                    return '<button class="btn btn-sm" onclick="onEditClicked(\'' + row.ID + '\'); return false;">' +
+                    return '<button class="btn btn-sm btn-primary" onclick="onEditClicked(\'' + row.ID + '\'); return false;">' +
                         '<span class="glyphicon glyphicon-pencil spinning"></span></button>';
                 }
             },
@@ -27,7 +35,7 @@
                 title: 'Delete',
                 orderable: false,
                 render: function (data, type, row, meta) {
-                    return '<button class="btn btn-sm" onclick="onDeleteClicked(\'' + row.Name + '\', \'' + row.ID + '\', \'' + meta.settings.sTableId + '\'); return false;">' +
+                    return '<button class="btn btn-sm btn-primary" onclick="onDeleteClicked(\'' + row.Name + '\', \'' + row.ID + '\', \'' + meta.settings.sTableId + '\'); return false;">' +
                         '<span class="glyphicon glyphicon-trash spinning"></span></button>';
                 }
             }
@@ -59,7 +67,16 @@ function onEditClicked(cID) {
             }
         });
 }
-}
-function searchCustomers(searchString, tableID) {
-    
+
+function searchCustomers(searchString) {
+    /*ajaxGetCustomers(searchString,
+        function (response) {
+            if (response !== null && response !== undefined) {
+               //$('#CustomerTable').DataTable().ajax.reload();
+            }
+        });*/
+
+    //$('#CustomerTable').DataTable().ajax.data = searchString;
+    $('#CustomerTable').DataTable().ajax.reload();
+    //$('#CustomerTable').DataTable().ajax.data = null;
 }

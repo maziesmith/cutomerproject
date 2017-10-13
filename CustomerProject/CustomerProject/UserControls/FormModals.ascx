@@ -135,7 +135,7 @@
                                 </div>
                             </div>
                             <div class="modal-footer">
-                                <button class="btn btn-default" onclick="addOrEditCustomer(); return false;">Submit Entry</button>
+                                <button class="btn btn-primary btnResize" onclick="addOrEditCustomer(); return false;">OK</button>
                             </div>
                         </form>
                     </div>
